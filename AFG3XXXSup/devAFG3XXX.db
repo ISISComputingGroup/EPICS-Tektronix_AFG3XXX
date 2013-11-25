@@ -5,3 +5,11 @@ record(stringin, "$(P)IDN")
     field(INP,  "@devAFG3XXX.proto getIDN $(PORT)")
     field(PINI, "YES")
 }
+
+record(stringin, "$(P)OUTPUT1:STATUS")
+{
+    field(DESC, "SCPI identification string")
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getStatus(1) $(PORT)")
+    field(SCAN, "1 second")
+}

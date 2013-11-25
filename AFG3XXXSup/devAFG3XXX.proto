@@ -7,3 +7,9 @@ getIDN {
     in "%/(.{0,39})/";
     ExtraInput = Ignore;
 }
+
+getStatus {
+    out "OUTP\$1:STAT?";
+    in "%s";
+    ExtraInput = Ignore;
+}
