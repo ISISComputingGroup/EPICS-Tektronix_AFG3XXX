@@ -1,0 +1,7 @@
+record(stringin, "$(P)IDN")
+{
+    field(DESC, "SCPI identification string")
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getIDN $(PORT)")
+    field(PINI, "YES")
+}
