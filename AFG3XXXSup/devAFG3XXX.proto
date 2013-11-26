@@ -1,5 +1,5 @@
-#Terminator = '';
-ReplyTimeout = 2000;
+InTerminator = '\n';
+#ReplyTimeout = 2000;
 
 getIDN {
     out "*IDN?";
@@ -10,6 +10,126 @@ getIDN {
 
 getStatus {
     out "OUTP\$1:STAT?";
+    in "%d";
+    ExtraInput = Ignore;
+}
+
+getFunction {
+    out "SOUR\$1:FUNC:SHAP?";
     in "%s";
     ExtraInput = Ignore;
+}
+
+setFunction {
+    out "SOUR\$1:FUNC:SHAP %{SIN|SQU|PULS|RAMP|PRN|DC|SINC|GAUS|LOR|ERIS|EDEC|HAV}";
+}
+
+getImpedance {
+    out "OUTP\$1:IMP?";
+    in "%f";
+    ExtraInput = Ignore;
+}
+
+setImpedance {
+    out "OUTP\$1:IMP %f";
+}
+
+getPolarity {
+    out "OUTP\$1:POL?";
+    in "%s";
+    ExtraInput = Ignore;
+}
+
+setPolarity {
+    out "OUTP\$1:POL %{NORM|INV}";
+}
+
+getVoltage {
+    out "SOUR\$1:VOLT?";
+    in "%f";
+    ExtraInput = Ignore;
+}
+
+setVoltage {
+    out "SOUR\$1:VOLT %f";
+}
+
+getVoltageUnits {
+    out "SOUR\$1:VOLT:UNIT?";
+    in "%s";
+    ExtraInput = Ignore;
+}
+
+setVoltageUnits {
+    out "SOUR\$1:VOLT:UNIT %{VPP|VRMS|DBM}";
+}
+
+getVoltageLowLimit {
+    out "SOUR\$1:VOLT:LIM:LOW?";
+    in "%f";
+    ExtraInput = Ignore;
+}
+
+setVoltageLowLimit {
+    out "SOUR\$1:VOLT:LIM:LOW %f";
+}
+
+getVoltageHighLimit {
+    out "SOUR\$1:VOLT:LIM:HIGH?";
+    in "%f";
+    ExtraInput = Ignore;
+}
+
+setVoltageHighLimit {
+    out "SOUR\$1:VOLT:LIM:HIGH %f";
+}
+
+getVoltageLowLevel {
+    out "SOUR\$1:VOLT:LEV:IMM:LOW?";
+    in "%f";
+    ExtraInput = Ignore;
+}
+
+setVoltageLowLevel {
+    out "SOUR\$1:VOLT:LEV:IMM:LOW %f";
+}
+
+getVoltageHighLevel {
+    out "SOUR\$1:VOLT:LEV:IMM:HIGH?";
+    in "%f";
+    ExtraInput = Ignore;
+}
+
+setVoltageHighLevel {
+    out "SOUR\$1:VOLT:LEV:IMM:HIGH %f";
+}
+
+getVoltageOffset {
+    out "SOUR\$1:VOLT:LEV:IMM:OFFS?";
+    in "%f";
+    ExtraInput = Ignore;
+}
+
+setVoltageOffset {
+    out "SOUR\$1:VOLT:LEV:IMM:OFFS %f";
+}
+
+getFrequency {
+    out "SOUR\$1:FREQ:FIX?";
+    in "%f";
+    ExtraInput = Ignore;
+}
+
+setFrequency {
+    out "SOUR\$1:FREQ:FIX %f";
+}
+
+getPhase {
+    out "SOUR\$1:PHASE:ADJ?";
+    in "%f";
+    ExtraInput = Ignore;       
+}
+
+setPhase {
+    out "SOUR\$1:PHASE:ADJ %f";
 }
