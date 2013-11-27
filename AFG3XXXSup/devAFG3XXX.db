@@ -326,7 +326,7 @@ record(ai, "$(P)OUTPUT1:SWEEP_SPAN")
     field(SCAN, "1 second")
 }
 
-#Stringout because can send either <value>, INF, MIN or MAX
+#Stringout because can send either <value>, MIN or MAX
 record(stringout, "$(P)OUTPUT1:SWEEP_SPAN:SP")
 {
     field(DTYP, "stream")
@@ -342,7 +342,7 @@ record(ai, "$(P)OUTPUT1:SWEEP_START")
     field(SCAN, "1 second")
 }
 
-#Stringout because can send either <value>, INF, MIN or MAX
+#Stringout because can send either <value>, MIN or MAX
 record(stringout, "$(P)OUTPUT1:SWEEP_START:SP")
 {
     field(DTYP, "stream")
@@ -358,7 +358,7 @@ record(ai, "$(P)OUTPUT1:SWEEP_STOP")
     field(SCAN, "1 second")
 }
 
-#Stringout because can send either <value>, INF, MIN or MAX
+#Stringout because can send either <value>, MIN or MAX
 record(stringout, "$(P)OUTPUT1:SWEEP_STOP:SP")
 {
     field(DTYP, "stream")
@@ -374,7 +374,7 @@ record(ai, "$(P)OUTPUT1:SWEEP_HTIME")
     field(SCAN, "1 second")
 }
 
-#Stringout because can send either <value>, INF, MIN or MAX
+#Stringout because can send either <value>, MIN or MAX
 record(stringout, "$(P)OUTPUT1:SWEEP_HTIME:SP")
 {
     field(DTYP, "stream")
@@ -401,3 +401,52 @@ record(mbbo, "$(P)OUTPUT1:SWEEP_MODE:SP")
 }
 
 alias("$(P)OUTPUT1:SWEEP_MODE", "$(P)OUTPUT1:SWEEP_MODE:SP:RBV")
+
+record(ai, "$(P)OUTPUT1:SWEEP_RTIME")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepReturnTime(1) $(PORT)")
+    field(SCAN, "1 second")
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT1:SWEEP_RTIME:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepReturnTime(1) $(PORT)")
+}
+
+alias("$(P)OUTPUT1:SWEEP_RTIME", "$(P)OUTPUT1:SWEEP_RTIME:SP:RBV")
+
+record(stringin, "$(P)OUTPUT1:SWEEP_SPACING")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepSpacing(1) $(PORT)")
+    field(SCAN, "1 second")
+}
+
+record(mbbo, "$(P)OUTPUT1:SWEEP_SPACING:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepSpacing(1) $(PORT)")
+    field(ZRST, "LIN")
+    field(ONST, "LOG")	
+}
+
+alias("$(P)OUTPUT1:SWEEP_SPACING", "$(P)OUTPUT1:SWEEP_SPACING:SP:RBV")
+
+record(ai, "$(P)OUTPUT1:SWEEP_TIME")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepTime(1) $(PORT)")
+    field(SCAN, "1 second")
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT1:SWEEP_TIME:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepTime(1) $(PORT)")
+}
+
+alias("$(P)OUTPUT1:SWEEP_TIME", "$(P)OUTPUT1:SWEEP_TIME:SP:RBV")

@@ -232,3 +232,33 @@ getSweepMode {
 setSweepMode {
     out "SOUR\$1:SWE:MODE %{AUTO|MAN}";
 }
+
+getSweepReturnTime {
+    out "SOUR\$1:SWE:RTIM?";
+    in "%f";
+    ExtraInput = Ignore;       
+}
+
+setSweepReturnTime {
+    out "SOUR\$1:SWE:RTIM %s";
+}
+
+getSweepSpacing {
+    out "SOUR\$1:SWE:SPAC?";
+    in "%s";
+    ExtraInput = Ignore;       
+}
+
+setSweepSpacing {
+    out "SOUR\$1:SWE:SPAC %{LIN|LOG}";
+}
+
+getSweepTime {
+    out "SOUR\$1:SWE:TIME?";
+    in "%f";
+    ExtraInput = Ignore;       
+}
+
+setSweepTime {
+    out "SOUR\$1:SWE:TIME %s";
+}
