@@ -25,7 +25,7 @@ AFG3022B_DBD += drvVxi11.dbd
 #AFG3022B_DBD += drv488Gpib.dbd
 
 AFG3022B_LIBS += stream pcre
-AFG3022B_LIBS += asyn devIocStats
+AFG3022B_LIBS += asyn devIocStats oncrpc
 
 # AFG3022B_registerRecordDeviceDriver.cpp derives from AFG3022B.dbd
 AFG3022B_SRCS += AFG3022B_registerRecordDeviceDriver.cpp
