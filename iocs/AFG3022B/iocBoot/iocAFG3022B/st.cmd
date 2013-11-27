@@ -15,7 +15,7 @@ cd ${TOP}
 dbLoadDatabase "dbd/AFG3022B.dbd"
 AFG3022B_registerRecordDeviceDriver pdbbase
 
-vxi11Configure("GPIB0", "130.246.49.179", 0, 0.0,"inst0", 0, 1)
+vxi11Configure("GPIB0", "130.246.49.179", 0, 0.0,"inst0", 0, 0)
 #asynSetTraceIOMask("GPIB0",0,2)
 #asynSetTraceMask("GPIB0",0,255)
 

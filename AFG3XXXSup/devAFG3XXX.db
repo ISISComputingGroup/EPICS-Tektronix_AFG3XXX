@@ -4,7 +4,6 @@ record(stringin, "$(P)IDN")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getIDN $(PORT)")
     field(PINI, "YES")
-    field(SCAN, "10 second")	
 }
 
 ### CHANNEL 1 ###
@@ -326,7 +325,7 @@ record(ai, "$(P)OUTPUT1:SWEEP_SPAN")
     field(SCAN, "1 second")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT1:SWEEP_SPAN:SP")
 {
     field(DTYP, "stream")
@@ -342,7 +341,7 @@ record(ai, "$(P)OUTPUT1:SWEEP_START")
     field(SCAN, "1 second")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT1:SWEEP_START:SP")
 {
     field(DTYP, "stream")
@@ -358,7 +357,7 @@ record(ai, "$(P)OUTPUT1:SWEEP_STOP")
     field(SCAN, "1 second")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT1:SWEEP_STOP:SP")
 {
     field(DTYP, "stream")
@@ -374,7 +373,7 @@ record(ai, "$(P)OUTPUT1:SWEEP_HTIME")
     field(SCAN, "1 second")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT1:SWEEP_HTIME:SP")
 {
     field(DTYP, "stream")
@@ -402,51 +401,398 @@ record(mbbo, "$(P)OUTPUT1:SWEEP_MODE:SP")
 
 alias("$(P)OUTPUT1:SWEEP_MODE", "$(P)OUTPUT1:SWEEP_MODE:SP:RBV")
 
-record(ai, "$(P)OUTPUT1:SWEEP_RTIME")
+### CHANNEL 2 ###
+
+record(bi, "$(P)OUTPUT2:STATUS")
 {
     field(DTYP, "stream")
-    field(INP,  "@devAFG3XXX.proto getSweepReturnTime(1) $(PORT)")
+    field(INP,  "@devAFG3XXX.proto getStatus(2) $(PORT)")
     field(SCAN, "1 second")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")	
+}
+
+record(stringin, "$(P)OUTPUT2:FUNC")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getFunction(2) $(PORT)")
+    field(SCAN, "1 second")	
+}
+
+record(mbbo, "$(P)OUTPUT2:FUNC:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setFunction(2) $(PORT)")
+    field(ZRST, "SIN")
+    field(ONST, "SQU")
+    field(TWST, "PULS")
+    field(THST, "RAMP")
+    field(FRST, "PRN")
+    field(FVST, "DC")
+    field(SXST, "SINC")
+    field(SVST, "GAUS")
+    field(EIST, "LOR")
+    field(NIST, "ERIS")
+    field(TEST, "EDEC")
+    field(ELST, "HAV")
+}
+
+alias("$(P)OUTPUT2:FUNC", "$(P)OUTPUT2:FUNC:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:IMPEDANCE")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getImpedance(2) $(PORT)")
+    field(SCAN, "1 second")	
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT2:IMPEDANCE:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setImpedance(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:IMPEDANCE", "$(P)OUTPUT2:IMPEDANCE:SP:RBV")
+
+record(stringin, "$(P)OUTPUT2:POLARITY")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getPolarity(2) $(PORT)")
+    field(SCAN, "1 second")	
+}
+
+record(mbbo, "$(P)OUTPUT2:POLARITY:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setPolarity(2) $(PORT)")
+    field(ZRST, "NORM")
+    field(ONST, "INV")
+}
+
+alias("$(P)OUTPUT2:POLARITY", "$(P)OUTPUT2:POLARITY:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:VOLT")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getVoltage(2) $(PORT)")
+    field(SCAN, "1 second")	
 }
 
 #Stringout because can send either <value>, MIN or MAX
-record(stringout, "$(P)OUTPUT1:SWEEP_RTIME:SP")
+record(stringout, "$(P)OUTPUT2:VOLT:SP")
 {
     field(DTYP, "stream")
-    field(OUT,  "@devAFG3XXX.proto setSweepReturnTime(1) $(PORT)")
+    field(OUT,  "@devAFG3XXX.proto setVoltage(2) $(PORT)")
 }
 
-alias("$(P)OUTPUT1:SWEEP_RTIME", "$(P)OUTPUT1:SWEEP_RTIME:SP:RBV")
+alias("$(P)OUTPUT2:VOLT", "$(P)OUTPUT2:VOLT:SP:RBV")
 
-record(stringin, "$(P)OUTPUT1:SWEEP_SPACING")
+record(stringin, "$(P)OUTPUT2:VOLT:UNITS")
 {
     field(DTYP, "stream")
-    field(INP,  "@devAFG3XXX.proto getSweepSpacing(1) $(PORT)")
-    field(SCAN, "1 second")
+    field(INP,  "@devAFG3XXX.proto getVoltageUnits(2) $(PORT)")
+    field(SCAN, "1 second")	
 }
 
-record(mbbo, "$(P)OUTPUT1:SWEEP_SPACING:SP")
+record(mbbo, "$(P)OUTPUT2:VOLT:UNITS:SP")
 {
     field(DTYP, "stream")
-    field(OUT,  "@devAFG3XXX.proto setSweepSpacing(1) $(PORT)")
-    field(ZRST, "LIN")
-    field(ONST, "LOG")	
+    field(OUT,  "@devAFG3XXX.proto setVoltageUnits(2) $(PORT)")
+    field(ZRST, "VPP")
+    field(ONST, "VRMS")
+    field(TWST, "DBM")
 }
 
-alias("$(P)OUTPUT1:SWEEP_SPACING", "$(P)OUTPUT1:SWEEP_SPACING:SP:RBV")
+alias("$(P)OUTPUT2:VOLT:UNITS", "$(P)OUTPUT2:VOLT:UNITS:SP:RBV")
 
-record(ai, "$(P)OUTPUT1:SWEEP_TIME")
+record(ai, "$(P)OUTPUT2:VOLT:LOWLIMIT")
 {
+    field(DESC, "The lowest voltage that can be set")
     field(DTYP, "stream")
-    field(INP,  "@devAFG3XXX.proto getSweepTime(1) $(PORT)")
-    field(SCAN, "1 second")
+    field(INP,  "@devAFG3XXX.proto getVoltageLowLimit(2) $(PORT)")
+    field(SCAN, "1 second")	
 }
 
 #Stringout because can send either <value>, MIN or MAX
-record(stringout, "$(P)OUTPUT1:SWEEP_TIME:SP")
+record(stringout, "$(P)OUTPUT2:VOLT:LOWLIMIT:SP")
 {
     field(DTYP, "stream")
-    field(OUT,  "@devAFG3XXX.proto setSweepTime(1) $(PORT)")
+    field(OUT,  "@devAFG3XXX.proto setVoltageLowLimit(2) $(PORT)")
 }
 
-alias("$(P)OUTPUT1:SWEEP_TIME", "$(P)OUTPUT1:SWEEP_TIME:SP:RBV")
+alias("$(P)OUTPUT2:VOLT:LOWLIMIT", "$(P)OUTPUT2:VOLT:LOWLIMIT:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:VOLT:HIGHLIMIT")
+{
+    field(DESC, "The highest voltage that can be set")
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getVoltageHighLimit(2) $(PORT)")
+    field(SCAN, "1 second")	
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT2:VOLT:HIGHLIMIT:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setVoltageHighLimit(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:VOLT:HIGHLIMIT", "$(P)OUTPUT2:VOLT:HIGHLIMIT:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:VOLT:LOW")
+{
+    field(DESC, "The low end voltage")
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getVoltageLowLevel(2) $(PORT)")
+    field(SCAN, "1 second")	
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT2:VOLT:LOW:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setVoltageLowLevel(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:VOLT:LOW", "$(P)OUTPUT2:VOLT:LOW:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:VOLT:HIGH")
+{
+    field(DESC, "The high end voltage")
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getVoltageHighLevel(2) $(PORT)")
+    field(SCAN, "1 second")	
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT2:VOLT:HIGH:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setVoltageHighLevel(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:VOLT:HIGH", "$(P)OUTPUT2:VOLT:HIGH:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:VOLT:OFFSET")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getVoltageOffset(2) $(PORT)")
+    field(SCAN, "1 second")	
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT2:VOLT:OFFSET:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setVoltageOffset(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:VOLT:OFFSET", "$(P)OUTPUT2:VOLT:OFFSET:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:FREQ")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getFrequency(2) $(PORT)")
+    field(SCAN, "1 second")	
+}
+
+#Stringout because can send either <value>, MIN or MAX
+#It is possible to send units too, e.g. 200 kHz
+record(stringout, "$(P)OUTPUT2:FREQ:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setFrequency(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:FREQ", "$(P)OUTPUT2:FREQ:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:PHASE")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getPhase(2) $(PORT)")
+    field(SCAN, "1 second")
+    field(EGU, "radians")
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT2:PHASE:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setPhase(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:PHASE", "$(P)OUTPUT2:PHASE:SP:RBV")
+
+record(bi, "$(P)OUTPUT2:BURST_STATUS")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getBurstStatus(2) $(PORT)")
+    field(SCAN, "1 second")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+}
+
+record(bo, "$(P)OUTPUT2:BURST_STATUS:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setBurstStatus(2) $(PORT)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")	
+}
+
+alias("$(P)OUTPUT2:BURST_STATUS", "$(P)OUTPUT2:BURST_STATUS:SP:RBV")
+
+record(stringin, "$(P)OUTPUT2:BURST_MODE")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getBurstMode(2) $(PORT)")
+    field(SCAN, "1 second")
+}
+
+record(mbbo, "$(P)OUTPUT2:BURST_MODE:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setBurstMode(2) $(PORT)")
+    field(ZRST, "TRIG")
+    field(ONST, "GAT")	
+}
+
+alias("$(P)OUTPUT2:BURST_MODE", "$(P)OUTPUT2:BURST_MODE:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:BURST_NCYCLES")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getBurstNCycles(2) $(PORT)")
+    field(SCAN, "1 second")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT2:BURST_NCYCLES:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setBurstNCycles(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:BURST_NCYCLES", "$(P)OUTPUT2:BURST_NCYCLES:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:BURST_TDELAY")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getBurstTimeDelay(2) $(PORT)")
+    field(SCAN, "1 second")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT2:BURST_TDELAY:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setBurstTimeDelay(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:BURST_TDELAY", "$(P)OUTPUT2:BURST_TDELAY:SP:RBV")
+
+record(mbbi, "$(P)OUTPUT2:FREQ_MODE")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getFrequencyMode(2) $(PORT)")
+    field(SCAN, "1 second")
+    field(ZRST, "CW")
+    field(ONST, "FIX")	
+    field(TWST, "SWE")
+}
+
+record(mbbo, "$(P)OUTPUT2:FREQ_MODE:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setFrequencyMode(2) $(PORT)")
+    field(ZRST, "CW")
+    field(ONST, "FIX")	
+    field(TWST, "SWE")
+}
+
+alias("$(P)OUTPUT2:FREQ_MODE", "$(P)OUTPUT2:FREQ_MODE:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:SWEEP_SPAN")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepSpan(2) $(PORT)")
+    field(SCAN, "1 second")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT2:SWEEP_SPAN:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepSpan(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:SWEEP_SPAN", "$(P)OUTPUT2:SWEEP_SPAN:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:SWEEP_START")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepStart(2) $(PORT)")
+    field(SCAN, "1 second")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT2:SWEEP_START:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepStart(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:SWEEP_START", "$(P)OUTPUT2:SWEEP_START:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:SWEEP_STOP")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepStop(2) $(PORT)")
+    field(SCAN, "1 second")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT2:SWEEP_STOP:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepStop(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:SWEEP_STOP", "$(P)OUTPUT2:SWEEP_STOP:SP:RBV")
+
+record(ai, "$(P)OUTPUT2:SWEEP_HTIME")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepHoldTime(2) $(PORT)")
+    field(SCAN, "1 second")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT2:SWEEP_HTIME:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepHoldTime(2) $(PORT)")
+}
+
+alias("$(P)OUTPUT2:SWEEP_HTIME", "$(P)OUTPUT2:SWEEP_HTIME:SP:RBV")
+
+record(mbbi, "$(P)OUTPUT2:SWEEP_MODE")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepMode(2) $(PORT)")
+    field(SCAN, "1 second")
+    field(ZRST, "AUTO")
+    field(ONST, "MAN")	
+}
+
+record(mbbo, "$(P)OUTPUT2:SWEEP_MODE:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepMode(2) $(PORT)")
+    field(ZRST, "AUTO")
+    field(ONST, "MAN")	
+}
+
+alias("$(P)OUTPUT2:SWEEP_MODE", "$(P)OUTPUT2:SWEEP_MODE:SP:RBV")
+
