@@ -21,6 +21,7 @@ AFG3022B_DBD += asyn.dbd
 AFG3022B_DBD += drvAsynSerialPort.dbd
 AFG3022B_DBD += drvAsynIPPort.dbd
 AFG3022B_DBD += devIocStats.dbd
+AFG3022B_DBD += drvVxi11.dbd
 #AFG3022B_DBD += drv488Gpib.dbd
 
 AFG3022B_LIBS += stream pcre
