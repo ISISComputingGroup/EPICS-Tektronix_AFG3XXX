@@ -8,7 +8,6 @@
 epicsEnvSet "IOCNAME" "$(P=$(MYPVPREFIX))AFG3022B"
 epicsEnvSet "IOCSTATS_DB" "$(DEVIOCSTATS)/db/iocAdminSoft.db"
 epicsEnvSet "STREAM_PROTOCOL_PATH" "$(TOP)/../../AFG3XXXSup"
-epicsEnvSet "TTY" "$(TTY=\\\\\\\\.\\\\COM18)"
 
 cd ${TOP}
 
@@ -16,8 +15,10 @@ cd ${TOP}
 dbLoadDatabase "dbd/AFG3022B.dbd"
 AFG3022B_registerRecordDeviceDriver pdbbase
 
-drvAsynIPPortConfigure ("IP", "130.246.50.160:4000")
-#GpibBoardDriverConfig("GPIB0","1","0","3","0")
+vxi11Configure("GPIB0", "130.246.49.179", 0, 0.0,"inst0", 0, 1)
+#asynSetTraceIOMask("GPIB0",0,2)
+#asynSetTraceMask("GPIB0",0,255)
+
 
 ## Load record instances
 dbLoadRecords("$(TOP)/../../db/devAFG3XXX.db","P=$(IOCNAME):, PORT=GPIB0")
