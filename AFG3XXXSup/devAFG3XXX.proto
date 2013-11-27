@@ -31,7 +31,7 @@ getImpedance {
 }
 
 setImpedance {
-    out "OUTP\$1:IMP %f";
+    out "OUTP\$1:IMP %s";
 }
 
 getPolarity {
@@ -51,7 +51,7 @@ getVoltage {
 }
 
 setVoltage {
-    out "SOUR\$1:VOLT %f";
+    out "SOUR\$1:VOLT %s";
 }
 
 getVoltageUnits {
@@ -71,7 +71,7 @@ getVoltageLowLimit {
 }
 
 setVoltageLowLimit {
-    out "SOUR\$1:VOLT:LIM:LOW %f";
+    out "SOUR\$1:VOLT:LIM:LOW %s";
 }
 
 getVoltageHighLimit {
@@ -81,7 +81,7 @@ getVoltageHighLimit {
 }
 
 setVoltageHighLimit {
-    out "SOUR\$1:VOLT:LIM:HIGH %f";
+    out "SOUR\$1:VOLT:LIM:HIGH %s";
 }
 
 getVoltageLowLevel {
@@ -91,7 +91,7 @@ getVoltageLowLevel {
 }
 
 setVoltageLowLevel {
-    out "SOUR\$1:VOLT:LEV:IMM:LOW %f";
+    out "SOUR\$1:VOLT:LEV:IMM:LOW %s";
 }
 
 getVoltageHighLevel {
@@ -101,7 +101,7 @@ getVoltageHighLevel {
 }
 
 setVoltageHighLevel {
-    out "SOUR\$1:VOLT:LEV:IMM:HIGH %f";
+    out "SOUR\$1:VOLT:LEV:IMM:HIGH %s";
 }
 
 getVoltageOffset {
@@ -111,7 +111,7 @@ getVoltageOffset {
 }
 
 setVoltageOffset {
-    out "SOUR\$1:VOLT:LEV:IMM:OFFS %f";
+    out "SOUR\$1:VOLT:LEV:IMM:OFFS %s";
 }
 
 getFrequency {
@@ -121,7 +121,7 @@ getFrequency {
 }
 
 setFrequency {
-    out "SOUR\$1:FREQ:FIX %f";
+    out "SOUR\$1:FREQ:FIX %s";
 }
 
 getPhase {
@@ -131,5 +131,104 @@ getPhase {
 }
 
 setPhase {
-    out "SOUR\$1:PHASE:ADJ %f";
+    out "SOUR\$1:PHASE:ADJ %s";
+}
+
+getBurstStatus {
+    out "SOUR\$1:BURS:STAT?";
+    in "%d";
+    ExtraInput = Ignore;       
+}
+
+setBurstStatus {
+    out "SOUR\$1:BURS:STAT %{ON|OFF}";
+}
+
+getBurstMode {
+    out "SOUR\$1:BURS:MODE?";
+    in "%s";
+    ExtraInput = Ignore;       
+}
+
+setBurstMode {
+    out "SOUR\$1:BURS:MODE %{TRIG|GAT}";
+}
+
+getBurstNCycles {
+    out "SOUR\$1:BURS:NCYC?";
+    in "%f";
+    ExtraInput = Ignore;       
+}
+
+setBurstNCycles {
+    out "SOUR\$1:BURS:NCYC %s";
+}
+
+getBurstTimeDelay {
+    out "SOUR\$1:BURS:TDEL?";
+    in "%f";
+    ExtraInput = Ignore;       
+}
+
+setBurstTimeDelay {
+    out "SOUR\$1:BURS:TDEL %s";
+}
+getFrequencyMode {
+    out "SOUR\$1:FREQ:MODE?";
+    in "%{CW|FIX|SWE}";
+    ExtraInput = Ignore;       
+}
+
+setFrequencyMode {
+    out "SOUR\$1:FREQ:MODE %{CW|FIX|SWE}";
+}
+
+getSweepSpan {
+    out "SOUR\$1:FREQ:SPAN?";
+    in "%f";
+    ExtraInput = Ignore;       
+}
+
+setSweepSpan {
+    out "SOUR\$1:FREQ:SPAN %s";
+}
+
+getSweepStart {
+    out "SOUR\$1:FREQ:STAR?";
+    in "%f";
+    ExtraInput = Ignore;       
+}
+
+setSweepStart {
+    out "SOUR\$1:FREQ:STAR %s";
+}
+
+getSweepStop {
+    out "SOUR\$1:FREQ:STOP?";
+    in "%f";
+    ExtraInput = Ignore;       
+}
+
+setSweepStop {
+    out "SOUR\$1:FREQ:STOP %s";
+}
+
+getSweepHoldTime {
+    out "SOUR\$1:SWE:HTIM?";
+    in "%f";
+    ExtraInput = Ignore;       
+}
+
+setSweepHoldTime {
+    out "SOUR\$1:SWE:HTIM %s";
+}
+
+getSweepMode {
+    out "SOUR\$1:SWE:MODE?";
+    in "%{AUTO|MAN}";
+    ExtraInput = Ignore;       
+}
+
+setSweepMode {
+    out "SOUR\$1:SWE:MODE %{AUTO|MAN}";
 }
