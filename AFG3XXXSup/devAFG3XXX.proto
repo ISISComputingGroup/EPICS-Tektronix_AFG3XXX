@@ -14,9 +14,13 @@ getStatus {
     ExtraInput = Ignore;
 }
 
+setStatus {
+    out "OUTP\$1:STAT %d";
+}
+
 getFunction {
     out "SOUR\$1:FUNC:SHAP?";
-    in "%s";
+    in "%{SIN|SQU|PULS|RAMP|PRN|DC|SINC|GAUS|LOR|ERIS|EDEC|HAV}";
     ExtraInput = Ignore;
 }
 
@@ -36,7 +40,7 @@ setImpedance {
 
 getPolarity {
     out "OUTP\$1:POL?";
-    in "%s";
+    in "%{NORM|INV}";
     ExtraInput = Ignore;
 }
 
@@ -56,7 +60,7 @@ setVoltage {
 
 getVoltageUnits {
     out "SOUR\$1:VOLT:UNIT?";
-    in "%s";
+    in "%{VPP|VRMS|DBM}";
     ExtraInput = Ignore;
 }
 
@@ -146,7 +150,7 @@ setBurstStatus {
 
 getBurstMode {
     out "SOUR\$1:BURS:MODE?";
-    in "%s";
+    in "%{TRIG|GAT}";
     ExtraInput = Ignore;       
 }
 
@@ -173,6 +177,7 @@ getBurstTimeDelay {
 setBurstTimeDelay {
     out "SOUR\$1:BURS:TDEL %s";
 }
+
 getFrequencyMode {
     out "SOUR\$1:FREQ:MODE?";
     in "%{CW|FIX|SWE}";

@@ -1,9 +1,21 @@
+record(bo, "$(P)DISABLE") 
+{
+  field(DESC, "Disable comms")
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(OMSL, "supervisory")
+  field(ZNAM, "COMMS ENABLED")
+  field(ONAM, "COMMS DISABLED")
+}
+
 record(stringin, "$(P)IDN")
 {
     field(DESC, "SCPI identification string")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getIDN $(PORT)")
     field(PINI, "YES")
+    field(SIML, "$(P)SIM")
+    field(SDIS, "$(P)DISABLE")
 }
 
 ### CHANNEL 1 ###
@@ -15,13 +27,44 @@ record(bi, "$(P)OUTPUT1:STATUS")
     field(SCAN, "1 second")
     field(ZNAM, "OFF")
     field(ONAM, "ON")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
-record(stringin, "$(P)OUTPUT1:FUNC")
+record(bo, "$(P)OUTPUT1:STATUS:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setStatus(1) $(PORT)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE:SP")
+    field(SDIS, "$(P)DISABLE")
+}
+
+alias("$(P)OUTPUT1:STATUS", "$(P)OUTPUT1:STATUS:SP:RBV")
+
+record(mbbi, "$(P)OUTPUT1:FUNC")
 {
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getFunction(1) $(PORT)")
     field(SCAN, "1 second")	
+    field(ZRST, "SIN")
+    field(ONST, "SQU")
+    field(TWST, "PULS")
+    field(THST, "RAMP")
+    field(FRST, "PRN")
+    field(FVST, "DC")
+    field(SXST, "SINC")
+    field(SVST, "GAUS")
+    field(EIST, "LOR")
+    field(NIST, "ERIS")
+    field(TEST, "EDEC")
+    field(ELST, "HAV")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)OUTPUT1:FUNC:SP")
@@ -40,6 +83,9 @@ record(mbbo, "$(P)OUTPUT1:FUNC:SP")
     field(NIST, "ERIS")
     field(TEST, "EDEC")
     field(ELST, "HAV")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE:SP")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:FUNC", "$(P)OUTPUT1:FUNC:SP:RBV")
@@ -49,6 +95,9 @@ record(ai, "$(P)OUTPUT1:IMPEDANCE")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getImpedance(1) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, INF, MIN or MAX
@@ -56,15 +105,23 @@ record(stringout, "$(P)OUTPUT1:IMPEDANCE:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setImpedance(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:IMPEDANCE", "$(P)OUTPUT1:IMPEDANCE:SP:RBV")
 
-record(stringin, "$(P)OUTPUT1:POLARITY")
+record(mbbi, "$(P)OUTPUT1:POLARITY")
 {
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getPolarity(1) $(PORT)")
     field(SCAN, "1 second")	
+    field(ZRST, "NORM")
+    field(ONST, "INV")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)OUTPUT1:POLARITY:SP")
@@ -73,6 +130,9 @@ record(mbbo, "$(P)OUTPUT1:POLARITY:SP")
     field(OUT,  "@devAFG3XXX.proto setPolarity(1) $(PORT)")
     field(ZRST, "NORM")
     field(ONST, "INV")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:POLARITY", "$(P)OUTPUT1:POLARITY:SP:RBV")
@@ -82,6 +142,9 @@ record(ai, "$(P)OUTPUT1:VOLT")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltage(1) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -89,15 +152,24 @@ record(stringout, "$(P)OUTPUT1:VOLT:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setVoltage(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:VOLT", "$(P)OUTPUT1:VOLT:SP:RBV")
 
-record(stringin, "$(P)OUTPUT1:VOLT:UNITS")
+record(mbbi, "$(P)OUTPUT1:VOLT:UNITS")
 {
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltageUnits(1) $(PORT)")
-    field(SCAN, "1 second")	
+    field(SCAN, "1 second")
+    field(ZRST, "VPP")
+    field(ONST, "VRMS")
+    field(TWST, "DBM")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)OUTPUT1:VOLT:UNITS:SP")
@@ -107,6 +179,9 @@ record(mbbo, "$(P)OUTPUT1:VOLT:UNITS:SP")
     field(ZRST, "VPP")
     field(ONST, "VRMS")
     field(TWST, "DBM")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:VOLT:UNITS", "$(P)OUTPUT1:VOLT:UNITS:SP:RBV")
@@ -117,6 +192,9 @@ record(ai, "$(P)OUTPUT1:VOLT:LOWLIMIT")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltageLowLimit(1) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -124,6 +202,9 @@ record(stringout, "$(P)OUTPUT1:VOLT:LOWLIMIT:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setVoltageLowLimit(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:VOLT:LOWLIMIT", "$(P)OUTPUT1:VOLT:LOWLIMIT:SP:RBV")
@@ -134,6 +215,9 @@ record(ai, "$(P)OUTPUT1:VOLT:HIGHLIMIT")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltageHighLimit(1) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -141,6 +225,9 @@ record(stringout, "$(P)OUTPUT1:VOLT:HIGHLIMIT:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setVoltageHighLimit(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:VOLT:HIGHLIMIT", "$(P)OUTPUT1:VOLT:HIGHLIMIT:SP:RBV")
@@ -151,6 +238,9 @@ record(ai, "$(P)OUTPUT1:VOLT:LOW")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltageLowLevel(1) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -158,6 +248,9 @@ record(stringout, "$(P)OUTPUT1:VOLT:LOW:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setVoltageLowLevel(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:VOLT:LOW", "$(P)OUTPUT1:VOLT:LOW:SP:RBV")
@@ -168,6 +261,9 @@ record(ai, "$(P)OUTPUT1:VOLT:HIGH")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltageHighLevel(1) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -175,6 +271,9 @@ record(stringout, "$(P)OUTPUT1:VOLT:HIGH:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setVoltageHighLevel(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:VOLT:HIGH", "$(P)OUTPUT1:VOLT:HIGH:SP:RBV")
@@ -184,6 +283,9 @@ record(ai, "$(P)OUTPUT1:VOLT:OFFSET")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltageOffset(1) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -191,6 +293,9 @@ record(stringout, "$(P)OUTPUT1:VOLT:OFFSET:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setVoltageOffset(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:VOLT:OFFSET", "$(P)OUTPUT1:VOLT:OFFSET:SP:RBV")
@@ -200,6 +305,9 @@ record(ai, "$(P)OUTPUT1:FREQ")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getFrequency(1) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -208,6 +316,9 @@ record(stringout, "$(P)OUTPUT1:FREQ:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setFrequency(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:FREQ", "$(P)OUTPUT1:FREQ:SP:RBV")
@@ -218,6 +329,9 @@ record(ai, "$(P)OUTPUT1:PHASE")
     field(INP,  "@devAFG3XXX.proto getPhase(1) $(PORT)")
     field(SCAN, "1 second")
     field(EGU, "radians")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -225,6 +339,9 @@ record(stringout, "$(P)OUTPUT1:PHASE:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setPhase(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:PHASE", "$(P)OUTPUT1:PHASE:SP:RBV")
@@ -236,6 +353,9 @@ record(bi, "$(P)OUTPUT1:BURST_STATUS")
     field(SCAN, "1 second")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bo, "$(P)OUTPUT1:BURST_STATUS:SP")
@@ -244,15 +364,23 @@ record(bo, "$(P)OUTPUT1:BURST_STATUS:SP")
     field(OUT,  "@devAFG3XXX.proto setBurstStatus(1) $(PORT)")
     field(ZNAM, "OFF")
     field(ONAM, "ON")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:BURST_STATUS", "$(P)OUTPUT1:BURST_STATUS:SP:RBV")
 
-record(stringin, "$(P)OUTPUT1:BURST_MODE")
+record(mbbi, "$(P)OUTPUT1:BURST_MODE")
 {
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getBurstMode(1) $(PORT)")
     field(SCAN, "1 second")
+    field(ZRST, "TRIG")
+    field(ONST, "GAT")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)OUTPUT1:BURST_MODE:SP")
@@ -261,6 +389,9 @@ record(mbbo, "$(P)OUTPUT1:BURST_MODE:SP")
     field(OUT,  "@devAFG3XXX.proto setBurstMode(1) $(PORT)")
     field(ZRST, "TRIG")
     field(ONST, "GAT")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:BURST_MODE", "$(P)OUTPUT1:BURST_MODE:SP:RBV")
@@ -270,6 +401,9 @@ record(ai, "$(P)OUTPUT1:BURST_NCYCLES")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getBurstNCycles(1) $(PORT)")
     field(SCAN, "1 second")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, INF, MIN or MAX
@@ -277,6 +411,9 @@ record(stringout, "$(P)OUTPUT1:BURST_NCYCLES:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setBurstNCycles(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:BURST_NCYCLES", "$(P)OUTPUT1:BURST_NCYCLES:SP:RBV")
@@ -286,13 +423,19 @@ record(ai, "$(P)OUTPUT1:BURST_TDELAY")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getBurstTimeDelay(1) $(PORT)")
     field(SCAN, "1 second")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT1:BURST_TDELAY:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setBurstTimeDelay(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:BURST_TDELAY", "$(P)OUTPUT1:BURST_TDELAY:SP:RBV")
@@ -305,6 +448,9 @@ record(mbbi, "$(P)OUTPUT1:FREQ_MODE")
     field(ZRST, "CW")
     field(ONST, "FIX")	
     field(TWST, "SWE")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)OUTPUT1:FREQ_MODE:SP")
@@ -314,6 +460,9 @@ record(mbbo, "$(P)OUTPUT1:FREQ_MODE:SP")
     field(ZRST, "CW")
     field(ONST, "FIX")	
     field(TWST, "SWE")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:FREQ_MODE", "$(P)OUTPUT1:FREQ_MODE:SP:RBV")
@@ -323,13 +472,19 @@ record(ai, "$(P)OUTPUT1:SWEEP_SPAN")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getSweepSpan(1) $(PORT)")
     field(SCAN, "1 second")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT1:SWEEP_SPAN:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setSweepSpan(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:SWEEP_SPAN", "$(P)OUTPUT1:SWEEP_SPAN:SP:RBV")
@@ -339,13 +494,19 @@ record(ai, "$(P)OUTPUT1:SWEEP_START")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getSweepStart(1) $(PORT)")
     field(SCAN, "1 second")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT1:SWEEP_START:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setSweepStart(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:SWEEP_START", "$(P)OUTPUT1:SWEEP_START:SP:RBV")
@@ -355,13 +516,19 @@ record(ai, "$(P)OUTPUT1:SWEEP_STOP")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getSweepStop(1) $(PORT)")
     field(SCAN, "1 second")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT1:SWEEP_STOP:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setSweepStop(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:SWEEP_STOP", "$(P)OUTPUT1:SWEEP_STOP:SP:RBV")
@@ -371,13 +538,19 @@ record(ai, "$(P)OUTPUT1:SWEEP_HTIME")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getSweepHoldTime(1) $(PORT)")
     field(SCAN, "1 second")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT1:SWEEP_HTIME:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setSweepHoldTime(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:SWEEP_HTIME", "$(P)OUTPUT1:SWEEP_HTIME:SP:RBV")
@@ -389,6 +562,9 @@ record(mbbi, "$(P)OUTPUT1:SWEEP_MODE")
     field(SCAN, "1 second")
     field(ZRST, "AUTO")
     field(ONST, "MAN")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)OUTPUT1:SWEEP_MODE:SP")
@@ -397,58 +573,12 @@ record(mbbo, "$(P)OUTPUT1:SWEEP_MODE:SP")
     field(OUT,  "@devAFG3XXX.proto setSweepMode(1) $(PORT)")
     field(ZRST, "AUTO")
     field(ONST, "MAN")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT1:SWEEP_MODE", "$(P)OUTPUT1:SWEEP_MODE:SP:RBV")
-
-record(ai, "$(P)OUTPUT1:SWEEP_RTIME")
-{
-    field(DTYP, "stream")
-    field(INP,  "@devAFG3XXX.proto getSweepReturnTime(1) $(PORT)")
-    field(SCAN, "1 second")
-}
-
-#Stringout because can send either <value>, MIN or MAX
-record(stringout, "$(P)OUTPUT1:SWEEP_RTIME:SP")
-{
-    field(DTYP, "stream")
-    field(OUT,  "@devAFG3XXX.proto setSweepReturnTime(1) $(PORT)")
-}
-
-alias("$(P)OUTPUT1:SWEEP_RTIME", "$(P)OUTPUT1:SWEEP_RTIME:SP:RBV")
-
-record(stringin, "$(P)OUTPUT1:SWEEP_SPACING")
-{
-    field(DTYP, "stream")
-    field(INP,  "@devAFG3XXX.proto getSweepSpacing(1) $(PORT)")
-    field(SCAN, "1 second")
-}
-
-record(mbbo, "$(P)OUTPUT1:SWEEP_SPACING:SP")
-{
-    field(DTYP, "stream")
-    field(OUT,  "@devAFG3XXX.proto setSweepSpacing(1) $(PORT)")
-    field(ZRST, "LIN")
-    field(ONST, "LOG")	
-}
-
-alias("$(P)OUTPUT1:SWEEP_SPACING", "$(P)OUTPUT1:SWEEP_SPACING:SP:RBV")
-
-record(ai, "$(P)OUTPUT1:SWEEP_TIME")
-{
-    field(DTYP, "stream")
-    field(INP,  "@devAFG3XXX.proto getSweepTime(1) $(PORT)")
-    field(SCAN, "1 second")
-}
-
-#Stringout because can send either <value>, MIN or MAX
-record(stringout, "$(P)OUTPUT1:SWEEP_TIME:SP")
-{
-    field(DTYP, "stream")
-    field(OUT,  "@devAFG3XXX.proto setSweepTime(1) $(PORT)")
-}
-
-alias("$(P)OUTPUT1:SWEEP_TIME", "$(P)OUTPUT1:SWEEP_TIME:SP:RBV")
 
 ### CHANNEL 2 ###
 
@@ -459,13 +589,44 @@ record(bi, "$(P)OUTPUT2:STATUS")
     field(SCAN, "1 second")
     field(ZNAM, "OFF")
     field(ONAM, "ON")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
-record(stringin, "$(P)OUTPUT2:FUNC")
+record(bo, "$(P)OUTPUT2:STATUS:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setStatus(2) $(PORT)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE:SP")
+    field(SDIS, "$(P)DISABLE")
+}
+
+alias("$(P)OUTPUT2:STATUS", "$(P)OUTPUT2:STATUS:SP:RBV")
+
+record(mbbi, "$(P)OUTPUT2:FUNC")
 {
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getFunction(2) $(PORT)")
     field(SCAN, "1 second")	
+    field(ZRST, "SIN")
+    field(ONST, "SQU")
+    field(TWST, "PULS")
+    field(THST, "RAMP")
+    field(FRST, "PRN")
+    field(FVST, "DC")
+    field(SXST, "SINC")
+    field(SVST, "GAUS")
+    field(EIST, "LOR")
+    field(NIST, "ERIS")
+    field(TEST, "EDEC")
+    field(ELST, "HAV")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)OUTPUT2:FUNC:SP")
@@ -484,6 +645,9 @@ record(mbbo, "$(P)OUTPUT2:FUNC:SP")
     field(NIST, "ERIS")
     field(TEST, "EDEC")
     field(ELST, "HAV")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE:SP")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:FUNC", "$(P)OUTPUT2:FUNC:SP:RBV")
@@ -493,6 +657,9 @@ record(ai, "$(P)OUTPUT2:IMPEDANCE")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getImpedance(2) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, INF, MIN or MAX
@@ -500,15 +667,23 @@ record(stringout, "$(P)OUTPUT2:IMPEDANCE:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setImpedance(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:IMPEDANCE", "$(P)OUTPUT2:IMPEDANCE:SP:RBV")
 
-record(stringin, "$(P)OUTPUT2:POLARITY")
+record(mbbi, "$(P)OUTPUT2:POLARITY")
 {
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getPolarity(2) $(PORT)")
     field(SCAN, "1 second")	
+    field(ZRST, "NORM")
+    field(ONST, "INV")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)OUTPUT2:POLARITY:SP")
@@ -517,6 +692,9 @@ record(mbbo, "$(P)OUTPUT2:POLARITY:SP")
     field(OUT,  "@devAFG3XXX.proto setPolarity(2) $(PORT)")
     field(ZRST, "NORM")
     field(ONST, "INV")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:POLARITY", "$(P)OUTPUT2:POLARITY:SP:RBV")
@@ -526,6 +704,9 @@ record(ai, "$(P)OUTPUT2:VOLT")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltage(2) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -533,15 +714,24 @@ record(stringout, "$(P)OUTPUT2:VOLT:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setVoltage(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:VOLT", "$(P)OUTPUT2:VOLT:SP:RBV")
 
-record(stringin, "$(P)OUTPUT2:VOLT:UNITS")
+record(mbbi, "$(P)OUTPUT2:VOLT:UNITS")
 {
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltageUnits(2) $(PORT)")
-    field(SCAN, "1 second")	
+    field(SCAN, "1 second")
+    field(ZRST, "VPP")
+    field(ONST, "VRMS")
+    field(TWST, "DBM")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)OUTPUT2:VOLT:UNITS:SP")
@@ -551,6 +741,9 @@ record(mbbo, "$(P)OUTPUT2:VOLT:UNITS:SP")
     field(ZRST, "VPP")
     field(ONST, "VRMS")
     field(TWST, "DBM")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:VOLT:UNITS", "$(P)OUTPUT2:VOLT:UNITS:SP:RBV")
@@ -561,6 +754,9 @@ record(ai, "$(P)OUTPUT2:VOLT:LOWLIMIT")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltageLowLimit(2) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -568,6 +764,9 @@ record(stringout, "$(P)OUTPUT2:VOLT:LOWLIMIT:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setVoltageLowLimit(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:VOLT:LOWLIMIT", "$(P)OUTPUT2:VOLT:LOWLIMIT:SP:RBV")
@@ -578,6 +777,9 @@ record(ai, "$(P)OUTPUT2:VOLT:HIGHLIMIT")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltageHighLimit(2) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -585,6 +787,9 @@ record(stringout, "$(P)OUTPUT2:VOLT:HIGHLIMIT:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setVoltageHighLimit(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:VOLT:HIGHLIMIT", "$(P)OUTPUT2:VOLT:HIGHLIMIT:SP:RBV")
@@ -595,6 +800,9 @@ record(ai, "$(P)OUTPUT2:VOLT:LOW")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltageLowLevel(2) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -602,6 +810,9 @@ record(stringout, "$(P)OUTPUT2:VOLT:LOW:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setVoltageLowLevel(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:VOLT:LOW", "$(P)OUTPUT2:VOLT:LOW:SP:RBV")
@@ -612,6 +823,9 @@ record(ai, "$(P)OUTPUT2:VOLT:HIGH")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltageHighLevel(2) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -619,6 +833,9 @@ record(stringout, "$(P)OUTPUT2:VOLT:HIGH:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setVoltageHighLevel(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:VOLT:HIGH", "$(P)OUTPUT2:VOLT:HIGH:SP:RBV")
@@ -628,6 +845,9 @@ record(ai, "$(P)OUTPUT2:VOLT:OFFSET")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getVoltageOffset(2) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -635,6 +855,9 @@ record(stringout, "$(P)OUTPUT2:VOLT:OFFSET:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setVoltageOffset(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:VOLT:OFFSET", "$(P)OUTPUT2:VOLT:OFFSET:SP:RBV")
@@ -644,6 +867,9 @@ record(ai, "$(P)OUTPUT2:FREQ")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getFrequency(2) $(PORT)")
     field(SCAN, "1 second")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -652,6 +878,9 @@ record(stringout, "$(P)OUTPUT2:FREQ:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setFrequency(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:FREQ", "$(P)OUTPUT2:FREQ:SP:RBV")
@@ -662,6 +891,9 @@ record(ai, "$(P)OUTPUT2:PHASE")
     field(INP,  "@devAFG3XXX.proto getPhase(2) $(PORT)")
     field(SCAN, "1 second")
     field(EGU, "radians")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -669,6 +901,9 @@ record(stringout, "$(P)OUTPUT2:PHASE:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setPhase(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:PHASE", "$(P)OUTPUT2:PHASE:SP:RBV")
@@ -680,6 +915,9 @@ record(bi, "$(P)OUTPUT2:BURST_STATUS")
     field(SCAN, "1 second")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bo, "$(P)OUTPUT2:BURST_STATUS:SP")
@@ -688,15 +926,23 @@ record(bo, "$(P)OUTPUT2:BURST_STATUS:SP")
     field(OUT,  "@devAFG3XXX.proto setBurstStatus(2) $(PORT)")
     field(ZNAM, "OFF")
     field(ONAM, "ON")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:BURST_STATUS", "$(P)OUTPUT2:BURST_STATUS:SP:RBV")
 
-record(stringin, "$(P)OUTPUT2:BURST_MODE")
+record(mbbi, "$(P)OUTPUT2:BURST_MODE")
 {
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getBurstMode(2) $(PORT)")
     field(SCAN, "1 second")
+    field(ZRST, "TRIG")
+    field(ONST, "GAT")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)OUTPUT2:BURST_MODE:SP")
@@ -705,6 +951,9 @@ record(mbbo, "$(P)OUTPUT2:BURST_MODE:SP")
     field(OUT,  "@devAFG3XXX.proto setBurstMode(2) $(PORT)")
     field(ZRST, "TRIG")
     field(ONST, "GAT")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:BURST_MODE", "$(P)OUTPUT2:BURST_MODE:SP:RBV")
@@ -714,6 +963,9 @@ record(ai, "$(P)OUTPUT2:BURST_NCYCLES")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getBurstNCycles(2) $(PORT)")
     field(SCAN, "1 second")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 #Stringout because can send either <value>, INF, MIN or MAX
@@ -721,6 +973,9 @@ record(stringout, "$(P)OUTPUT2:BURST_NCYCLES:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setBurstNCycles(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:BURST_NCYCLES", "$(P)OUTPUT2:BURST_NCYCLES:SP:RBV")
@@ -730,13 +985,19 @@ record(ai, "$(P)OUTPUT2:BURST_TDELAY")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getBurstTimeDelay(2) $(PORT)")
     field(SCAN, "1 second")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT2:BURST_TDELAY:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setBurstTimeDelay(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:BURST_TDELAY", "$(P)OUTPUT2:BURST_TDELAY:SP:RBV")
@@ -749,6 +1010,9 @@ record(mbbi, "$(P)OUTPUT2:FREQ_MODE")
     field(ZRST, "CW")
     field(ONST, "FIX")	
     field(TWST, "SWE")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)OUTPUT2:FREQ_MODE:SP")
@@ -758,6 +1022,9 @@ record(mbbo, "$(P)OUTPUT2:FREQ_MODE:SP")
     field(ZRST, "CW")
     field(ONST, "FIX")	
     field(TWST, "SWE")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:FREQ_MODE", "$(P)OUTPUT2:FREQ_MODE:SP:RBV")
@@ -767,13 +1034,19 @@ record(ai, "$(P)OUTPUT2:SWEEP_SPAN")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getSweepSpan(2) $(PORT)")
     field(SCAN, "1 second")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT2:SWEEP_SPAN:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setSweepSpan(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:SWEEP_SPAN", "$(P)OUTPUT2:SWEEP_SPAN:SP:RBV")
@@ -783,13 +1056,19 @@ record(ai, "$(P)OUTPUT2:SWEEP_START")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getSweepStart(2) $(PORT)")
     field(SCAN, "1 second")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT2:SWEEP_START:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setSweepStart(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:SWEEP_START", "$(P)OUTPUT2:SWEEP_START:SP:RBV")
@@ -799,13 +1078,19 @@ record(ai, "$(P)OUTPUT2:SWEEP_STOP")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getSweepStop(2) $(PORT)")
     field(SCAN, "1 second")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT2:SWEEP_STOP:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setSweepStop(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:SWEEP_STOP", "$(P)OUTPUT2:SWEEP_STOP:SP:RBV")
@@ -815,13 +1100,19 @@ record(ai, "$(P)OUTPUT2:SWEEP_HTIME")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getSweepHoldTime(2) $(PORT)")
     field(SCAN, "1 second")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
-#Stringout because can send either <value>, MIN or MAX
+#Stringout because can send either <value>, INF, MIN or MAX
 record(stringout, "$(P)OUTPUT2:SWEEP_HTIME:SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@devAFG3XXX.proto setSweepHoldTime(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:SWEEP_HTIME", "$(P)OUTPUT2:SWEEP_HTIME:SP:RBV")
@@ -833,6 +1124,9 @@ record(mbbi, "$(P)OUTPUT2:SWEEP_MODE")
     field(SCAN, "1 second")
     field(ZRST, "AUTO")
     field(ONST, "MAN")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)OUTPUT2:SWEEP_MODE:SP")
@@ -841,57 +1135,30 @@ record(mbbo, "$(P)OUTPUT2:SWEEP_MODE:SP")
     field(OUT,  "@devAFG3XXX.proto setSweepMode(2) $(PORT)")
     field(ZRST, "AUTO")
     field(ONST, "MAN")	
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:VALUE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)OUTPUT2:SWEEP_MODE", "$(P)OUTPUT2:SWEEP_MODE:SP:RBV")
 
-record(ai, "$(P)OUTPUT2:SWEEP_RTIME")
+### SIMULATION ###
+
+record(bo, "$(P)SIM") 
 {
-    field(DTYP, "stream")
-    field(INP,  "@devAFG3XXX.proto getSweepReturnTime(2) $(PORT)")
-    field(SCAN, "1 second")
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(ZNAM, "NO")
+    field(ONAM, "YES")
 }
 
-#Stringout because can send either <value>, MIN or MAX
-record(stringout, "$(P)OUTPUT2:SWEEP_RTIME:SP")
+record(stringout, "$(P)SIM:VALUE") 
 {
-    field(DTYP, "stream")
-    field(OUT,  "@devAFG3XXX.proto setSweepReturnTime(2) $(PORT)")
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
 }
 
-alias("$(P)OUTPUT2:SWEEP_RTIME", "$(P)OUTPUT2:SWEEP_RTIME:SP:RBV")
+alias("$(P)SIM:VALUE","$(P)SIM:VALUE:SP")
 
-record(stringin, "$(P)OUTPUT2:SWEEP_SPACING")
-{
-    field(DTYP, "stream")
-    field(INP,  "@devAFG3XXX.proto getSweepSpacing(2) $(PORT)")
-    field(SCAN, "1 second")
-}
-
-record(mbbo, "$(P)OUTPUT2:SWEEP_SPACING:SP")
-{
-    field(DTYP, "stream")
-    field(OUT,  "@devAFG3XXX.proto setSweepSpacing(2) $(PORT)")
-    field(ZRST, "LIN")
-    field(ONST, "LOG")	
-}
-
-alias("$(P)OUTPUT2:SWEEP_SPACING", "$(P)OUTPUT2:SWEEP_SPACING:SP:RBV")
-
-record(ai, "$(P)OUTPUT2:SWEEP_TIME")
-{
-    field(DTYP, "stream")
-    field(INP,  "@devAFG3XXX.proto getSweepTime(2) $(PORT)")
-    field(SCAN, "1 second")
-}
-
-#Stringout because can send either <value>, MIN or MAX
-record(stringout, "$(P)OUTPUT2:SWEEP_TIME:SP")
-{
-    field(DTYP, "stream")
-    field(OUT,  "@devAFG3XXX.proto setSweepTime(2) $(PORT)")
-}
-
-alias("$(P)OUTPUT2:SWEEP_TIME", "$(P)OUTPUT2:SWEEP_TIME:SP:RBV")
-
+alias("$(P)SIM:VALUE","$(P)SIM:VALUE:SP:RBV")
 
