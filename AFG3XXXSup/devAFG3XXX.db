@@ -107,7 +107,7 @@ record(ai, "$(P)OUTPUT1:IMPEDANCE")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:IMPEDANCE")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Ohm")
+	field(EGU, "ohm")
 }
 
 #Stringout because can send either <value>, INF, MIN or MAX
@@ -118,7 +118,7 @@ record(stringout, "$(P)OUTPUT1:IMPEDANCE:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:IMPEDANCE:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Ohm")
+	field(EGU, "ohm")
 }
 
 alias("$(P)OUTPUT1:IMPEDANCE", "$(P)OUTPUT1:IMPEDANCE:SP:RBV")
@@ -353,11 +353,11 @@ record(ai, "$(P)OUTPUT1:PHASE")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getPhase(1) $(PORT)")
     field(SCAN, "1 second")
-    field(EGU, "radians")
+    field(EGU, "radian")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:PHASE")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Rad") #Assuming Rad, but could be Deg
+	field(EGU, "radian") #Assuming Rad, but could be Deg
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -368,7 +368,7 @@ record(stringout, "$(P)OUTPUT1:PHASE:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:PHASE:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Rad") #Assuming Rad, but could be Deg
+	field(EGU, "radian") #Assuming Rad, but could be Deg
 }
 
 alias("$(P)OUTPUT1:PHASE", "$(P)OUTPUT1:PHASE:SP:RBV")
@@ -383,7 +383,7 @@ record(bi, "$(P)OUTPUT1:BURST_STATUS")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:BURST_STATUS")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Rad") #Assuming Rad, but could be Deg
+	field(EGU, "radian") #Assuming Rad, but could be Deg
 }
 
 record(bo, "$(P)OUTPUT1:BURST_STATUS:SP")
@@ -698,7 +698,7 @@ record(ai, "$(P)OUTPUT2:IMPEDANCE")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:IMPEDANCE")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Ohm")
+	field(EGU, "ohm")
 }
 
 #Stringout because can send either <value>, INF, MIN or MAX
@@ -709,7 +709,7 @@ record(stringout, "$(P)OUTPUT2:IMPEDANCE:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:IMPEDANCE:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Ohm")
+	field(EGU, "ohm")
 }
 
 alias("$(P)OUTPUT2:IMPEDANCE", "$(P)OUTPUT2:IMPEDANCE:SP:RBV")
@@ -944,11 +944,11 @@ record(ai, "$(P)OUTPUT2:PHASE")
     field(DTYP, "stream")
     field(INP,  "@devAFG3XXX.proto getPhase(2) $(PORT)")
     field(SCAN, "1 second")
-    field(EGU, "radians")
+    field(EGU, "radian")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:PHASE")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Rad") #Assuming Rad, but could be Deg
+	field(EGU, "radian") #Assuming Rad, but could be Deg
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -959,7 +959,7 @@ record(stringout, "$(P)OUTPUT2:PHASE:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:PHASE:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Rad") #Assuming Rad, but could be Deg
+	field(EGU, "radian") #Assuming Rad, but could be Deg
 }
 
 alias("$(P)OUTPUT2:PHASE", "$(P)OUTPUT2:PHASE:SP:RBV")
@@ -1235,7 +1235,7 @@ record(ai, "$(P)SIM:OUTPUT1:IMPEDANCE")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "Ohm")
+	field(EGU, "ohm")
 }
 
 alias("$(P)SIM:OUTPUT1:IMPEDANCE","$(P)SIM:OUTPUT1:IMPEDANCE:SP")
@@ -1418,7 +1418,7 @@ record(ai, "$(P)SIM:OUTPUT2:IMPEDANCE")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "Ohm")
+	field(EGU, "ohm")
 }
 
 alias("$(P)SIM:OUTPUT2:IMPEDANCE","$(P)SIM:OUTPUT2:IMPEDANCE:SP")
@@ -1462,7 +1462,7 @@ record(stringout, "$(P)SIM:OUTPUT2:PHASE")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "Rad")
+	field(EGU, "radian")
 }
 
 alias("$(P)SIM:OUTPUT2:PHASE","$(P)SIM:OUTPUT2:PHASE:SP")
@@ -1515,7 +1515,7 @@ record(stringout, "$(P)SIM:OUTPUT1:PHASE")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "Rad")
+	field(EGU, "radian")
 }
 
 alias("$(P)SIM:OUTPUT1:PHASE","$(P)SIM:OUTPUT1:PHASE:SP")
