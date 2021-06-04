@@ -27,6 +27,15 @@ record(stringin, "$(P)IDN")
     field(SDIS, "$(P)DISABLE")
 }
 
+record(bo, "$(P)TRIGGER")
+{
+    field(DESC, "Generate a trigger event"
+    field(DTYP, "stream")
+    field(OUT, "@devAFG3XXX.proto trigger $(PORT)")
+}
+
+alias("$(P)TRIGGER", "$(P)TRIGGER:SP")
+
 ### CHANNEL 1 ###
 
 record(bi, "$(P)OUTPUT1:STATUS")
