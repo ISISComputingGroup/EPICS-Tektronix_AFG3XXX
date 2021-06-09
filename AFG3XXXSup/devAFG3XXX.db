@@ -32,6 +32,9 @@ record(bo, "$(P)TRIGGER")
     field(DESC, "Generate a trigger event")
     field(DTYP, "stream")
     field(OUT, "@devAFG3XXX.proto trigger $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:TRIGGER")
+    field(SDIS, "$(P)DISABLE")
 }
 
 alias("$(P)TRIGGER", "$(P)TRIGGER:SP")
@@ -1260,6 +1263,12 @@ alias("$(P)SIM:OUTPUT1:SWEEP_MODE","$(P)SIM:OUTPUT1:SWEEP_MODE:SP")
 alias("$(P)SIM:OUTPUT1:SWEEP_MODE","$(P)SIM:OUTPUT1:SWEEP_MODE:SP:RBV")
 
 record(stringin, "$(P)SIM:IDN")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(bo, "$(P)SIM:TRIGGER")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
