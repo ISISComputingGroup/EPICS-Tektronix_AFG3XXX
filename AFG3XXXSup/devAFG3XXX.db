@@ -29,7 +29,7 @@ record(stringin, "$(P)IDN")
 
 record(bo, "$(P)TRIGGER")
 {
-    field(DESC, "Generate a trigger event"
+    field(DESC, "Generate a trigger event")
     field(DTYP, "stream")
     field(OUT, "@devAFG3XXX.proto trigger $(PORT)")
 }
