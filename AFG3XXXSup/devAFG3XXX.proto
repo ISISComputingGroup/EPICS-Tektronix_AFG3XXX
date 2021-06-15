@@ -267,3 +267,7 @@ getSweepTime {
 setSweepTime {
     out "SOUR\$1:SWE:TIME %s";
 }
+
+trigger {
+    out "*TRG";
+}

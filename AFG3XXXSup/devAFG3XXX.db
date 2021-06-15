@@ -27,6 +27,18 @@ record(stringin, "$(P)IDN")
     field(SDIS, "$(P)DISABLE")
 }
 
+record(bo, "$(P)TRIGGER")
+{
+    field(DESC, "Generate a trigger event")
+    field(DTYP, "stream")
+    field(OUT, "@devAFG3XXX.proto trigger $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:TRIGGER")
+    field(SDIS, "$(P)DISABLE")
+}
+
+alias("$(P)TRIGGER", "$(P)TRIGGER:SP")
+
 ### CHANNEL 1 ###
 
 record(bi, "$(P)OUTPUT1:STATUS")
@@ -107,7 +119,7 @@ record(ai, "$(P)OUTPUT1:IMPEDANCE")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:IMPEDANCE")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "ohm")
+    field(EGU, "ohm")
 }
 
 #Stringout because can send either <value>, INF, MIN or MAX
@@ -118,7 +130,6 @@ record(stringout, "$(P)OUTPUT1:IMPEDANCE:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:IMPEDANCE:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "ohm")
 }
 
 alias("$(P)OUTPUT1:IMPEDANCE", "$(P)OUTPUT1:IMPEDANCE:SP:RBV")
@@ -156,7 +167,6 @@ record(ai, "$(P)OUTPUT1:VOLT")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:VOLT")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 #Stringout because can send either <value>, MIN or MAX
@@ -167,7 +177,6 @@ record(stringout, "$(P)OUTPUT1:VOLT:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:VOLT:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 alias("$(P)OUTPUT1:VOLT", "$(P)OUTPUT1:VOLT:SP:RBV")
@@ -219,7 +228,6 @@ record(stringout, "$(P)OUTPUT1:VOLT:LOWLIMIT:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:VOLT:LOWLIMIT:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 alias("$(P)OUTPUT1:VOLT:LOWLIMIT", "$(P)OUTPUT1:VOLT:LOWLIMIT:SP:RBV")
@@ -244,7 +252,6 @@ record(stringout, "$(P)OUTPUT1:VOLT:HIGHLIMIT:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:VOLT:HIGHLIMIT:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 alias("$(P)OUTPUT1:VOLT:HIGHLIMIT", "$(P)OUTPUT1:VOLT:HIGHLIMIT:SP:RBV")
@@ -269,7 +276,6 @@ record(stringout, "$(P)OUTPUT1:VOLT:LOW:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:VOLT:LOW:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 alias("$(P)OUTPUT1:VOLT:LOW", "$(P)OUTPUT1:VOLT:LOW:SP:RBV")
@@ -294,7 +300,6 @@ record(stringout, "$(P)OUTPUT1:VOLT:HIGH:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:VOLT:HIGH:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 alias("$(P)OUTPUT1:VOLT:HIGH", "$(P)OUTPUT1:VOLT:HIGH:SP:RBV")
@@ -318,7 +323,6 @@ record(stringout, "$(P)OUTPUT1:VOLT:OFFSET:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:VOLT:OFFSET:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 alias("$(P)OUTPUT1:VOLT:OFFSET", "$(P)OUTPUT1:VOLT:OFFSET:SP:RBV")
@@ -343,7 +347,6 @@ record(stringout, "$(P)OUTPUT1:FREQ:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:FREQ:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Hz") #Assuming Hz, but could be kHz or MHz
 }
 
 alias("$(P)OUTPUT1:FREQ", "$(P)OUTPUT1:FREQ:SP:RBV")
@@ -367,7 +370,6 @@ record(stringout, "$(P)OUTPUT1:PHASE:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:PHASE:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "radian") #Assuming Rad, but could be Deg
 }
 
 alias("$(P)OUTPUT1:PHASE", "$(P)OUTPUT1:PHASE:SP:RBV")
@@ -382,7 +384,6 @@ record(bi, "$(P)OUTPUT1:BURST_STATUS")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:BURST_STATUS")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "radian") #Assuming Rad, but could be Deg
 }
 
 record(bo, "$(P)OUTPUT1:BURST_STATUS:SP")
@@ -464,7 +465,6 @@ record(stringout, "$(P)OUTPUT1:BURST_TDELAY:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:BURST_TDELAY:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "s") #Assuming s, but could be ns, us or ms
 }
 
 alias("$(P)OUTPUT1:BURST_TDELAY", "$(P)OUTPUT1:BURST_TDELAY:SP:RBV")
@@ -515,7 +515,6 @@ record(stringout, "$(P)OUTPUT1:SWEEP_SPAN:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:SWEEP_SPAN:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Hz") #Assuming Hz, but could be kHz or MHz
 }
 
 alias("$(P)OUTPUT1:SWEEP_SPAN", "$(P)OUTPUT1:SWEEP_SPAN:SP:RBV")
@@ -538,7 +537,6 @@ record(stringout, "$(P)OUTPUT1:SWEEP_START:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:SWEEP_START:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Hz") #Assuming Hz, but could be kHz or MHz
 }
 
 alias("$(P)OUTPUT1:SWEEP_START", "$(P)OUTPUT1:SWEEP_START:SP:RBV")
@@ -562,7 +560,6 @@ record(stringout, "$(P)OUTPUT1:SWEEP_STOP:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:SWEEP_STOP:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Hz") #Assuming Hz, but could be kHz or MHz
 }
 
 alias("$(P)OUTPUT1:SWEEP_STOP", "$(P)OUTPUT1:SWEEP_STOP:SP:RBV")
@@ -586,7 +583,6 @@ record(stringout, "$(P)OUTPUT1:SWEEP_HTIME:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:SWEEP_HTIME:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "s") #Assuming s, but could be ns, us or ms
 }
 
 alias("$(P)OUTPUT1:SWEEP_HTIME", "$(P)OUTPUT1:SWEEP_HTIME:SP:RBV")
@@ -601,7 +597,6 @@ record(mbbi, "$(P)OUTPUT1:SWEEP_MODE")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT1:SWEEP_MODE")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "s") #Assuming s, but could be ns, us or ms
 }
 
 record(mbbo, "$(P)OUTPUT1:SWEEP_MODE:SP")
@@ -708,7 +703,6 @@ record(stringout, "$(P)OUTPUT2:IMPEDANCE:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:IMPEDANCE:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "ohm")
 }
 
 alias("$(P)OUTPUT2:IMPEDANCE", "$(P)OUTPUT2:IMPEDANCE:SP:RBV")
@@ -757,7 +751,6 @@ record(stringout, "$(P)OUTPUT2:VOLT:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:VOLT:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 alias("$(P)OUTPUT2:VOLT", "$(P)OUTPUT2:VOLT:SP:RBV")
@@ -809,7 +802,6 @@ record(stringout, "$(P)OUTPUT2:VOLT:LOWLIMIT:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:VOLT:LOWLIMIT:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 alias("$(P)OUTPUT2:VOLT:LOWLIMIT", "$(P)OUTPUT2:VOLT:LOWLIMIT:SP:RBV")
@@ -834,7 +826,6 @@ record(stringout, "$(P)OUTPUT2:VOLT:HIGHLIMIT:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:VOLT:HIGHLIMIT:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 alias("$(P)OUTPUT2:VOLT:HIGHLIMIT", "$(P)OUTPUT2:VOLT:HIGHLIMIT:SP:RBV")
@@ -859,7 +850,6 @@ record(stringout, "$(P)OUTPUT2:VOLT:LOW:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:VOLT:LOW:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 alias("$(P)OUTPUT2:VOLT:LOW", "$(P)OUTPUT2:VOLT:LOW:SP:RBV")
@@ -884,7 +874,6 @@ record(stringout, "$(P)OUTPUT2:VOLT:HIGH:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:VOLT:HIGH:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 alias("$(P)OUTPUT2:VOLT:HIGH", "$(P)OUTPUT2:VOLT:HIGH:SP:RBV")
@@ -908,7 +897,6 @@ record(stringout, "$(P)OUTPUT2:VOLT:OFFSET:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:VOLT:OFFSET:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "V") #Assuming V, but could be mV
 }
 
 alias("$(P)OUTPUT2:VOLT:OFFSET", "$(P)OUTPUT2:VOLT:OFFSET:SP:RBV")
@@ -933,7 +921,6 @@ record(stringout, "$(P)OUTPUT2:FREQ:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:FREQ:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Hz") #Assuming Hz, but could be kHz or MHz
 }
 
 alias("$(P)OUTPUT2:FREQ", "$(P)OUTPUT2:FREQ:SP:RBV")
@@ -957,7 +944,6 @@ record(stringout, "$(P)OUTPUT2:PHASE:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:PHASE:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "radian") #Assuming Rad, but could be Deg
 }
 
 alias("$(P)OUTPUT2:PHASE", "$(P)OUTPUT2:PHASE:SP:RBV")
@@ -1053,7 +1039,6 @@ record(stringout, "$(P)OUTPUT2:BURST_TDELAY:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:BURST_TDELAY:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "s") #Assuming s, but could be ns, us or ms
 }
 
 alias("$(P)OUTPUT2:BURST_TDELAY", "$(P)OUTPUT2:BURST_TDELAY:SP:RBV")
@@ -1104,7 +1089,6 @@ record(stringout, "$(P)OUTPUT2:SWEEP_SPAN:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:SWEEP_SPAN:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Hz") #Assuming Hz, but could be kHz or MHz
 }
 
 alias("$(P)OUTPUT2:SWEEP_SPAN", "$(P)OUTPUT2:SWEEP_SPAN:SP:RBV")
@@ -1128,7 +1112,6 @@ record(stringout, "$(P)OUTPUT2:SWEEP_START:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:SWEEP_START:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Hz") #Assuming Hz, but could be kHz or MHz
 }
 
 alias("$(P)OUTPUT2:SWEEP_START", "$(P)OUTPUT2:SWEEP_START:SP:RBV")
@@ -1152,7 +1135,6 @@ record(stringout, "$(P)OUTPUT2:SWEEP_STOP:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:SWEEP_STOP:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "Hz") #Assuming Hz, but could be kHz or MHz
 }
 
 alias("$(P)OUTPUT2:SWEEP_STOP", "$(P)OUTPUT2:SWEEP_STOP:SP:RBV")
@@ -1176,7 +1158,6 @@ record(stringout, "$(P)OUTPUT2:SWEEP_HTIME:SP")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:OUTPUT2:SWEEP_HTIME:SP")
     field(SDIS, "$(P)DISABLE")
-	field(EGU, "s") #Assuming s, but could be ns, us or ms
 }
 
 alias("$(P)OUTPUT2:SWEEP_HTIME", "$(P)OUTPUT2:SWEEP_HTIME:SP:RBV")
@@ -1256,6 +1237,12 @@ record(stringin, "$(P)SIM:IDN")
     field(DTYP, "Soft Channel")
 }
 
+record(bo, "$(P)SIM:TRIGGER")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
 record(mbbo, "$(P)SIM:OUTPUT2:FREQ_MODE")
 {
     field(SCAN, "Passive")
@@ -1292,7 +1279,6 @@ record(stringout, "$(P)SIM:OUTPUT1:FREQ")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "Hz")
 }
 
 alias("$(P)SIM:OUTPUT1:FREQ","$(P)SIM:OUTPUT1:FREQ:SP")
@@ -1330,7 +1316,6 @@ record(stringout, "$(P)SIM:OUTPUT2:FREQ")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "Hz")
 }
 
 alias("$(P)SIM:OUTPUT2:FREQ","$(P)SIM:OUTPUT2:FREQ:SP")
@@ -1373,7 +1358,6 @@ record(stringout, "$(P)SIM:OUTPUT2:VOLT:HIGH")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "V")
 }
 
 alias("$(P)SIM:OUTPUT2:VOLT:HIGH","$(P)SIM:OUTPUT2:VOLT:HIGH:SP")
@@ -1384,7 +1368,6 @@ record(stringout, "$(P)SIM:OUTPUT2:VOLT:LOW")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "V")
 }
 
 alias("$(P)SIM:OUTPUT2:VOLT:LOW","$(P)SIM:OUTPUT2:VOLT:LOW:SP")
@@ -1395,7 +1378,6 @@ record(ai, "$(P)SIM:OUTPUT1:VOLT:LOW")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "V")
 }
 
 alias("$(P)SIM:OUTPUT1:VOLT:LOW","$(P)SIM:OUTPUT1:VOLT:LOW:SP")
@@ -1460,7 +1442,6 @@ record(stringout, "$(P)SIM:OUTPUT2:PHASE")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "radian")
 }
 
 alias("$(P)SIM:OUTPUT2:PHASE","$(P)SIM:OUTPUT2:PHASE:SP")
@@ -1471,7 +1452,6 @@ record(stringout, "$(P)SIM:OUTPUT2:SWEEP_STOP")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "Hz")
 }
 
 alias("$(P)SIM:OUTPUT2:SWEEP_STOP","$(P)SIM:OUTPUT2:SWEEP_STOP:SP")
@@ -1482,7 +1462,6 @@ record(stringout, "$(P)SIM:OUTPUT1:VOLT:LOWLIMIT")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "V")
 }
 
 alias("$(P)SIM:OUTPUT1:VOLT:LOWLIMIT","$(P)SIM:OUTPUT1:VOLT:LOWLIMIT:SP")
@@ -1513,7 +1492,6 @@ record(stringout, "$(P)SIM:OUTPUT1:PHASE")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "radian")
 }
 
 alias("$(P)SIM:OUTPUT1:PHASE","$(P)SIM:OUTPUT1:PHASE:SP")
@@ -1566,7 +1544,6 @@ record(stringout, "$(P)SIM:OUTPUT1:VOLT:HIGHLIMIT")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "V")
 }
 
 alias("$(P)SIM:OUTPUT1:VOLT:HIGHLIMIT","$(P)SIM:OUTPUT1:VOLT:HIGHLIMIT:SP")
@@ -1640,7 +1617,6 @@ record(stringout, "$(P)SIM:OUTPUT1:SWEEP_SPAN")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "Hz")
 }
 
 alias("$(P)SIM:OUTPUT1:SWEEP_SPAN","$(P)SIM:OUTPUT1:SWEEP_SPAN:SP")
@@ -1701,7 +1677,6 @@ record(stringout, "$(P)SIM:OUTPUT1:VOLT")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
-	field(EGU, "V")
 }
 
 alias("$(P)SIM:OUTPUT1:VOLT","$(P)SIM:OUTPUT1:VOLT:SP")
