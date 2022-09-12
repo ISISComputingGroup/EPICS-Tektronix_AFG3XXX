@@ -1,0 +1,61 @@
+record(bo, "$(P)DISABLE") 
+{
+  field(DESC, "Disable comms")
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(OMSL, "supervisory")
+  field(ZNAM, "COMMS ENABLED")
+  field(ONAM, "COMMS DISABLED")
+}
+
+record(bo, "$(P)SIM") 
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(ZNAM, "NO")
+    field(ONAM, "YES")
+}
+
+record(stringin, "$(P)IDN")
+{
+    field(DESC, "SCPI identification string")
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getIDN $(PORT)")
+    field(PINI, "YES")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:IDN")
+    field(SDIS, "$(P)DISABLE")
+}
+
+record(bo, "$(P)TRIGGER")
+{
+    field(DESC, "Generate a trigger event")
+    field(DTYP, "stream")
+    field(OUT, "@devAFG3XXX.proto trigger $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:TRIGGER")
+    field(SDIS, "$(P)DISABLE")
+}
+
+alias("$(P)TRIGGER", "$(P)TRIGGER:SP")
+
+## SIMULATION
+
+record(stringin, "$(P)SIM:IDN")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(bo, "$(P)SIM:TRIGGER")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(bo, "$(P)SIM:DISABLE")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+

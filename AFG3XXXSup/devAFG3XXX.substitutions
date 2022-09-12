@@ -1,0 +1,10 @@
+file "devAFG3XXXheader.template" {
+    pattern { P, PORT }
+	{ "\$(P)", "\$(PORT)" }
+}
+
+file "devAFG3XXXchannel.template" {
+    pattern { P, PORT, C }
+	{ "\$(P)", "\$(PORT)", "1" }
+	{ "\$(P)", "\$(PORT)", "2" }
+}
