@@ -16,6 +16,7 @@ getStatus {
 
 setStatus {
     out "OUTP\$1:STAT %d";
+	@init { out "OUTP\$1:STAT?"; in "%d"; }
 }
 
 getFunction {
