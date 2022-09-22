@@ -4,7 +4,7 @@ file "devAFG3XXXheader.template" {
 }
 
 file "devAFG3XXXchannel.template" {
-    pattern { P, PORT, C }
-    { "\$(P)", "\$(PORT)", "1" }
-    { "\$(P)", "\$(PORT)", "2" }
+    pattern { P, PORT, SCAN, C }
+    { "\$(P)", "\$(PORT)", "\$(SCAN)", "1" }
+    { "\$(P)", "\$(PORT)", "\$(SCAN)", "2" }
 }
