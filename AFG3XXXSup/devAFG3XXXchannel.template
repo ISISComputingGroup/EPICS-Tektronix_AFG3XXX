@@ -1,0 +1,858 @@
+### CHANNEL $(C) ###
+
+record(bi, "$(P)OUTPUT$(C):STATUS")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getStatus($(C)) $(PORT)")
+    field(SCAN, "1 second")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):STATUS")
+    field(SDIS, "$(P)DISABLE")
+    field(PINI, "YES")
+}
+
+record(bo, "$(P)OUTPUT$(C):STATUS:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setStatus($(C)) $(PORT)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):STATUS:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):STATUS")
+}
+
+alias("$(P)OUTPUT$(C):STATUS", "$(P)OUTPUT$(C):STATUS:SP:RBV")
+
+record(mbbi, "$(P)OUTPUT$(C):FUNC")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getFunction($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(ZRST, "SIN")
+    field(ONST, "SQU")
+    field(TWST, "PULS")
+    field(THST, "RAMP")
+    field(FRST, "PRN")
+    field(FVST, "DC")
+    field(SXST, "SINC")
+    field(SVST, "GAUS")
+    field(EIST, "LOR")
+    field(NIST, "ERIS")
+    field(TEST, "EDEC")
+    field(ELST, "HAV")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):FUNC")
+    field(SDIS, "$(P)DISABLE")
+    field(PINI, "YES")
+}
+
+record(mbbo, "$(P)OUTPUT$(C):FUNC:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setFunction($(C)) $(PORT)")
+    field(ZRST, "SIN")
+    field(ONST, "SQU")
+    field(TWST, "PULS")
+    field(THST, "RAMP")
+    field(FRST, "PRN")
+    field(FVST, "DC")
+    field(SXST, "SINC")
+    field(SVST, "GAUS")
+    field(EIST, "LOR")
+    field(NIST, "ERIS")
+    field(TEST, "EDEC")
+    field(ELST, "HAV")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):FUNC:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):FUNC")
+}
+
+alias("$(P)OUTPUT$(C):FUNC", "$(P)OUTPUT$(C):FUNC:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):IMPEDANCE")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getImpedance($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):IMPEDANCE")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "ohm")
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):IMPEDANCE:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setImpedance($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):IMPEDANCE:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):IMPEDANCE")
+}
+
+alias("$(P)OUTPUT$(C):IMPEDANCE", "$(P)OUTPUT$(C):IMPEDANCE:SP:RBV")
+
+record(mbbi, "$(P)OUTPUT$(C):POLARITY")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getPolarity($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(ZRST, "NORM")
+    field(ONST, "INV")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):POLARITY")
+    field(SDIS, "$(P)DISABLE")
+    field(PINI, "YES")
+}
+
+record(mbbo, "$(P)OUTPUT$(C):POLARITY:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setPolarity($(C)) $(PORT)")
+    field(ZRST, "NORM")
+    field(ONST, "INV")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):POLARITY:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):POLARITY")
+}
+
+alias("$(P)OUTPUT$(C):POLARITY", "$(P)OUTPUT$(C):POLARITY:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):VOLT")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getVoltage($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT")
+    field(SDIS, "$(P)DISABLE")
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):VOLT:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setVoltage($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):VOLT")
+}
+
+alias("$(P)OUTPUT$(C):VOLT", "$(P)OUTPUT$(C):VOLT:SP:RBV")
+
+record(mbbi, "$(P)OUTPUT$(C):VOLT:UNITS")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getVoltageUnits($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(ZRST, "VPP")
+    field(ONST, "VRMS")
+    field(TWST, "DBM")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:UNITS")
+    field(SDIS, "$(P)DISABLE")
+    field(PINI, "YES")
+}
+
+record(mbbo, "$(P)OUTPUT$(C):VOLT:UNITS:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setVoltageUnits($(C)) $(PORT)")
+    field(ZRST, "VPP")
+    field(ONST, "VRMS")
+    field(TWST, "DBM")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:UNITS:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):VOLT:UNITS")
+}
+
+alias("$(P)OUTPUT$(C):VOLT:UNITS", "$(P)OUTPUT$(C):VOLT:UNITS:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):VOLT:LOWLIMIT")
+{
+    field(DESC, "The lowest voltage that can be set")
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getVoltageLowLimit($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:LOWLIMIT")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "V") #Assuming V, but could be mV
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):VOLT:LOWLIMIT:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setVoltageLowLimit($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:LOWLIMIT:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):VOLT:LOWLIMIT")
+}
+
+alias("$(P)OUTPUT$(C):VOLT:LOWLIMIT", "$(P)OUTPUT$(C):VOLT:LOWLIMIT:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):VOLT:HIGHLIMIT")
+{
+    field(DESC, "The highest voltage that can be set")
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getVoltageHighLimit($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:HIGHLIMIT")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "V") #Assuming V, but could be mV
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):VOLT:HIGHLIMIT:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setVoltageHighLimit($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:HIGHLIMIT:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):VOLT:HIGHLIMIT")
+}
+
+alias("$(P)OUTPUT$(C):VOLT:HIGHLIMIT", "$(P)OUTPUT$(C):VOLT:HIGHLIMIT:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):VOLT:LOW")
+{
+    field(DESC, "The low end voltage")
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getVoltageLowLevel($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:LOW")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "V") #Assuming V, but could be mV
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):VOLT:LOW:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setVoltageLowLevel($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:LOW:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):VOLT:LOW")
+}
+
+alias("$(P)OUTPUT$(C):VOLT:LOW", "$(P)OUTPUT$(C):VOLT:LOW:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):VOLT:HIGH")
+{
+    field(DESC, "The high end voltage")
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getVoltageHighLevel($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:HIGH")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "V") #Assuming V, but could be mV
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):VOLT:HIGH:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setVoltageHighLevel($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:HIGH:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):VOLT:HIGH")
+}
+
+alias("$(P)OUTPUT$(C):VOLT:HIGH", "$(P)OUTPUT$(C):VOLT:HIGH:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):VOLT:OFFSET")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getVoltageOffset($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:OFFSET")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "V") #Assuming V, but could be mV
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):VOLT:OFFSET:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setVoltageOffset($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):VOLT:OFFSET:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):VOLT:OFFSET")
+}
+
+alias("$(P)OUTPUT$(C):VOLT:OFFSET", "$(P)OUTPUT$(C):VOLT:OFFSET:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):FREQ")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getFrequency($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):FREQ")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "Hz") #Assuming Hz, but could be kHz or MHz
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, MIN or MAX
+#It is possible to send units too, e.g. 200 kHz
+record(stringout, "$(P)OUTPUT$(C):FREQ:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setFrequency($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):FREQ:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):FREQ")
+}
+
+alias("$(P)OUTPUT$(C):FREQ", "$(P)OUTPUT$(C):FREQ:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):PHASE")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getPhase($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):PHASE")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "radian") #Assuming Rad, but could be Deg
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):PHASE:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setPhase($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):PHASE:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):PHASE")
+}
+
+alias("$(P)OUTPUT$(C):PHASE", "$(P)OUTPUT$(C):PHASE:SP:RBV")
+
+record(bi, "$(P)OUTPUT$(C):BURST_STATUS")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getBurstStatus($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):BURST_STATUS")
+    field(SDIS, "$(P)DISABLE")
+    field(PINI, "YES")
+}
+
+record(bo, "$(P)OUTPUT$(C):BURST_STATUS:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setBurstStatus($(C)) $(PORT)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):BURST_STATUS:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):BURST_STATUS")
+}
+
+alias("$(P)OUTPUT$(C):BURST_STATUS", "$(P)OUTPUT$(C):BURST_STATUS:SP:RBV")
+
+record(mbbi, "$(P)OUTPUT$(C):BURST_MODE")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getBurstMode($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(ZRST, "TRIG")
+    field(ONST, "GAT")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):BURST_MODE")
+    field(SDIS, "$(P)DISABLE")
+    field(PINI, "YES")
+}
+
+record(mbbo, "$(P)OUTPUT$(C):BURST_MODE:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setBurstMode($(C)) $(PORT)")
+    field(ZRST, "TRIG")
+    field(ONST, "GAT")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):BURST_MODE:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):BURST_MODE")
+}
+
+alias("$(P)OUTPUT$(C):BURST_MODE", "$(P)OUTPUT$(C):BURST_MODE:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):BURST_NCYCLES")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getBurstNCycles($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):BURST_NCYCLES")
+    field(SDIS, "$(P)DISABLE")
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):BURST_NCYCLES:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setBurstNCycles($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):BURST_NCYCLES:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):BURST_NCYCLES")
+}
+
+alias("$(P)OUTPUT$(C):BURST_NCYCLES", "$(P)OUTPUT$(C):BURST_NCYCLES:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):BURST_TDELAY")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getBurstTimeDelay($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):BURST_TDELAY")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "s") #Assuming s, but could be ns, us or ms
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):BURST_TDELAY:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setBurstTimeDelay($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):BURST_TDELAY:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):BURST_TDELAY")
+}
+
+alias("$(P)OUTPUT$(C):BURST_TDELAY", "$(P)OUTPUT$(C):BURST_TDELAY:SP:RBV")
+
+record(mbbi, "$(P)OUTPUT$(C):FREQ_MODE")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getFrequencyMode($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(ZRST, "CW")
+    field(ONST, "FIX")
+    field(TWST, "SWE")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):FREQ_MODE")
+    field(SDIS, "$(P)DISABLE")
+    field(PINI, "YES")
+}
+
+record(mbbo, "$(P)OUTPUT$(C):FREQ_MODE:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setFrequencyMode($(C)) $(PORT)")
+    field(ZRST, "CW")
+    field(ONST, "FIX")
+    field(TWST, "SWE")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):FREQ_MODE:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):FREQ_MODE")
+}
+
+alias("$(P)OUTPUT$(C):FREQ_MODE", "$(P)OUTPUT$(C):FREQ_MODE:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):SWEEP_SPAN")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepSpan($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):SWEEP_SPAN")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "Hz") #Assuming Hz, but could be kHz or MHz
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):SWEEP_SPAN:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepSpan($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):SWEEP_SPAN:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):SWEEP_SPAN")
+}
+
+alias("$(P)OUTPUT$(C):SWEEP_SPAN", "$(P)OUTPUT$(C):SWEEP_SPAN:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):SWEEP_START")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepStart($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):SWEEP_START")
+    field(SDIS, "$(P)DISABLE")
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):SWEEP_START:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepStart($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):SWEEP_START:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):SWEEP_START")
+}
+
+alias("$(P)OUTPUT$(C):SWEEP_START", "$(P)OUTPUT$(C):SWEEP_START:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):SWEEP_STOP")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepStop($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):SWEEP_STOP")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "Hz") #Assuming Hz, but could be kHz or MHz
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):SWEEP_STOP:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepStop($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):SWEEP_STOP:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):SWEEP_STOP")
+}
+
+alias("$(P)OUTPUT$(C):SWEEP_STOP", "$(P)OUTPUT$(C):SWEEP_STOP:SP:RBV")
+
+record(ai, "$(P)OUTPUT$(C):SWEEP_HTIME")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepHoldTime($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):SWEEP_HTIME")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "s") #Assuming s, but could be ns, us or ms
+    field(PINI, "YES")
+}
+
+#Stringout because can send either <value>, INF, MIN or MAX
+record(stringout, "$(P)OUTPUT$(C):SWEEP_HTIME:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepHoldTime($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):SWEEP_HTIME:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):SWEEP_HTIME")
+}
+
+alias("$(P)OUTPUT$(C):SWEEP_HTIME", "$(P)OUTPUT$(C):SWEEP_HTIME:SP:RBV")
+
+record(mbbi, "$(P)OUTPUT$(C):SWEEP_MODE")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getSweepMode($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(ZRST, "AUTO")
+    field(ONST, "MAN")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):SWEEP_MODE")
+    field(SDIS, "$(P)DISABLE")
+    field(PINI, "YES")
+}
+
+record(mbbo, "$(P)OUTPUT$(C):SWEEP_MODE:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setSweepMode($(C)) $(PORT)")
+    field(ZRST, "AUTO")
+    field(ONST, "MAN")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):SWEEP_MODE:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):SWEEP_MODE")
+}
+
+alias("$(P)OUTPUT$(C):SWEEP_MODE", "$(P)OUTPUT$(C):SWEEP_MODE:SP:RBV")
+
+### SIMULATION ###
+
+record(ai, "$(P)SIM:OUTPUT$(C):IMPEDANCE")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(EGU, "ohm")
+}
+
+alias("$(P)SIM:OUTPUT$(C):IMPEDANCE","$(P)SIM:OUTPUT$(C):IMPEDANCE:SP")
+
+alias("$(P)SIM:OUTPUT$(C):IMPEDANCE","$(P)SIM:OUTPUT$(C):IMPEDANCE:SP:RBV")
+
+record(mbbi, "$(P)SIM:OUTPUT$(C):SWEEP_MODE")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):SWEEP_MODE","$(P)SIM:OUTPUT$(C):SWEEP_MODE:SP")
+
+alias("$(P)SIM:OUTPUT$(C):SWEEP_MODE","$(P)SIM:OUTPUT$(C):SWEEP_MODE:SP:RBV")
+
+
+record(ai, "$(P)SIM:OUTPUT$(C):SWEEP_STOP")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(EGU, "Hz")
+}
+
+alias("$(P)SIM:OUTPUT$(C):SWEEP_STOP","$(P)SIM:OUTPUT$(C):SWEEP_STOP:SP")
+
+alias("$(P)SIM:OUTPUT$(C):SWEEP_STOP","$(P)SIM:OUTPUT$(C):SWEEP_STOP:SP:RBV")
+
+record(stringout, "$(P)SIM:OUTPUT$(C):FREQ")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):FREQ","$(P)SIM:OUTPUT$(C):FREQ:SP")
+
+alias("$(P)SIM:OUTPUT$(C):FREQ","$(P)SIM:OUTPUT$(C):FREQ:SP:RBV")
+
+record(ai, "$(P)SIM:OUTPUT$(C):SWEEP_START")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(EGU, "Hz")
+}
+
+alias("$(P)SIM:OUTPUT$(C):SWEEP_START","$(P)SIM:OUTPUT$(C):SWEEP_START:SP")
+
+alias("$(P)SIM:OUTPUT$(C):SWEEP_START","$(P)SIM:OUTPUT$(C):SWEEP_START:SP:RBV")
+
+record(ai, "$(P)SIM:OUTPUT$(C):VOLT:LOW")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):VOLT:LOW","$(P)SIM:OUTPUT$(C):VOLT:LOW:SP")
+
+alias("$(P)SIM:OUTPUT$(C):VOLT:LOW","$(P)SIM:OUTPUT$(C):VOLT:LOW:SP:RBV")
+
+record(mbbi, "$(P)SIM:OUTPUT$(C):FUNC")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):FUNC","$(P)SIM:OUTPUT$(C):FUNC:SP")
+
+alias("$(P)SIM:OUTPUT$(C):FUNC","$(P)SIM:OUTPUT$(C):FUNC:SP:RBV")
+
+record(ai, "$(P)SIM:OUTPUT$(C):VOLT:OFFSET")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(EGU, "V")
+}
+
+alias("$(P)SIM:OUTPUT$(C):VOLT:OFFSET","$(P)SIM:OUTPUT$(C):VOLT:OFFSET:SP")
+
+alias("$(P)SIM:OUTPUT$(C):VOLT:OFFSET","$(P)SIM:OUTPUT$(C):VOLT:OFFSET:SP:RBV")
+
+record(ai, "$(P)SIM:OUTPUT$(C):VOLT:HIGH")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(EGU, "V")
+}
+
+alias("$(P)SIM:OUTPUT$(C):VOLT:HIGH","$(P)SIM:OUTPUT$(C):VOLT:HIGH:SP")
+
+alias("$(P)SIM:OUTPUT$(C):VOLT:HIGH","$(P)SIM:OUTPUT$(C):VOLT:HIGH:SP:RBV")
+
+record(ai, "$(P)SIM:OUTPUT$(C):SWEEP_HTIME")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(EGU, "s")
+}
+
+alias("$(P)SIM:OUTPUT$(C):SWEEP_HTIME","$(P)SIM:OUTPUT$(C):SWEEP_HTIME:SP")
+
+alias("$(P)SIM:OUTPUT$(C):SWEEP_HTIME","$(P)SIM:OUTPUT$(C):SWEEP_HTIME:SP:RBV")
+
+record(stringout, "$(P)SIM:OUTPUT$(C):VOLT:LOWLIMIT")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):VOLT:LOWLIMIT","$(P)SIM:OUTPUT$(C):VOLT:LOWLIMIT:SP")
+
+alias("$(P)SIM:OUTPUT$(C):VOLT:LOWLIMIT","$(P)SIM:OUTPUT$(C):VOLT:LOWLIMIT:SP:RBV")
+
+record(mbbi, "$(P)SIM:OUTPUT$(C):BURST_MODE")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):BURST_MODE","$(P)SIM:OUTPUT$(C):BURST_MODE:SP")
+
+alias("$(P)SIM:OUTPUT$(C):BURST_MODE","$(P)SIM:OUTPUT$(C):BURST_MODE:SP:RBV")
+
+record(stringout, "$(P)SIM:OUTPUT$(C):PHASE")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):PHASE","$(P)SIM:OUTPUT$(C):PHASE:SP")
+
+alias("$(P)SIM:OUTPUT$(C):PHASE","$(P)SIM:OUTPUT$(C):PHASE:SP:RBV")
+
+record(mbbi, "$(P)SIM:OUTPUT$(C):FREQ_MODE")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):FREQ_MODE","$(P)SIM:OUTPUT$(C):FREQ_MODE:SP")
+
+alias("$(P)SIM:OUTPUT$(C):FREQ_MODE","$(P)SIM:OUTPUT$(C):FREQ_MODE:SP:RBV")
+
+record(stringout, "$(P)SIM:OUTPUT$(C):VOLT:HIGHLIMIT")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):VOLT:HIGHLIMIT","$(P)SIM:OUTPUT$(C):VOLT:HIGHLIMIT:SP")
+
+alias("$(P)SIM:OUTPUT$(C):VOLT:HIGHLIMIT","$(P)SIM:OUTPUT$(C):VOLT:HIGHLIMIT:SP:RBV")
+
+record(mbbo, "$(P)SIM:OUTPUT$(C):VOLT:UNITS")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):VOLT:UNITS","$(P)SIM:OUTPUT$(C):VOLT:UNITS:SP")
+
+alias("$(P)SIM:OUTPUT$(C):VOLT:UNITS","$(P)SIM:OUTPUT$(C):VOLT:UNITS:SP:RBV")
+
+record(mbbo, "$(P)SIM:OUTPUT$(C):POLARITY")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):POLARITY","$(P)SIM:OUTPUT$(C):POLARITY:SP")
+
+alias("$(P)SIM:OUTPUT$(C):POLARITY","$(P)SIM:OUTPUT$(C):POLARITY:SP:RBV")
+
+record(bo, "$(P)SIM:OUTPUT$(C):BURST_STATUS")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):BURST_STATUS","$(P)SIM:OUTPUT$(C):BURST_STATUS:SP")
+
+alias("$(P)SIM:OUTPUT$(C):BURST_STATUS","$(P)SIM:OUTPUT$(C):BURST_STATUS:SP:RBV")
+
+record(ai, "$(P)SIM:OUTPUT$(C):BURST_TDELAY")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(EGU, "s")
+}
+
+alias("$(P)SIM:OUTPUT$(C):BURST_TDELAY","$(P)SIM:OUTPUT$(C):BURST_TDELAY:SP")
+
+alias("$(P)SIM:OUTPUT$(C):BURST_TDELAY","$(P)SIM:OUTPUT$(C):BURST_TDELAY:SP:RBV")
+
+record(stringout, "$(P)SIM:OUTPUT$(C):SWEEP_SPAN")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):SWEEP_SPAN","$(P)SIM:OUTPUT$(C):SWEEP_SPAN:SP")
+
+alias("$(P)SIM:OUTPUT$(C):SWEEP_SPAN","$(P)SIM:OUTPUT$(C):SWEEP_SPAN:SP:RBV")
+
+record(bo, "$(P)SIM:OUTPUT$(C):STATUS")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):STATUS","$(P)SIM:OUTPUT$(C):STATUS:SP")
+
+alias("$(P)SIM:OUTPUT$(C):STATUS","$(P)SIM:OUTPUT$(C):STATUS:SP:RBV")
+
+record(stringout, "$(P)SIM:OUTPUT$(C):BURST_NCYCLES")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):BURST_NCYCLES","$(P)SIM:OUTPUT$(C):BURST_NCYCLES:SP")
+
+alias("$(P)SIM:OUTPUT$(C):BURST_NCYCLES","$(P)SIM:OUTPUT$(C):BURST_NCYCLES:SP:RBV")
+
+record(stringout, "$(P)SIM:OUTPUT$(C):VOLT")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT$(C):VOLT","$(P)SIM:OUTPUT$(C):VOLT:SP")
+
+alias("$(P)SIM:OUTPUT$(C):VOLT","$(P)SIM:OUTPUT$(C):VOLT:SP:RBV")
