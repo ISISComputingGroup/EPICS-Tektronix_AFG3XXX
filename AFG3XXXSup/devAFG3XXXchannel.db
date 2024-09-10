@@ -74,6 +74,30 @@ record(mbbo, "$(P)OUTPUT$(C):FUNC:SP")
 
 alias("$(P)OUTPUT$(C):FUNC", "$(P)OUTPUT$(C):FUNC:SP:RBV")
 
+record(ai, "$(P)OUTPUT$(C):RAMP:SYMMETRY")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devAFG3XXX.proto getRampSymmetry($(C)) $(PORT)")
+    field(SCAN, "$(SCAN=5 second)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):RAMP:SYMMETRY")
+    field(SDIS, "$(P)DISABLE")
+    field(EGU, "%")
+    field(PINI, "YES")
+}
+
+record(stringout, "$(P)OUTPUT$(C):RAMP:SYMMETRY:SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@devAFG3XXX.proto setRampSymmetry($(C)) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT$(C):RAMP:SYMMETRY:SP")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)OUTPUT$(C):RAMP:SYMMETRY")
+}
+
+alias("$(P)OUTPUT$(C):RAMP:SYMMETRY", "$(P)OUTPUT$(C):RAMP:SYMMETRY:SP:RBV")
+
 record(ai, "$(P)OUTPUT$(C):IMPEDANCE")
 {
     field(DTYP, "stream")
@@ -618,6 +642,17 @@ record(mbbo, "$(P)OUTPUT$(C):SWEEP_MODE:SP")
 alias("$(P)OUTPUT$(C):SWEEP_MODE", "$(P)OUTPUT$(C):SWEEP_MODE:SP:RBV")
 
 ### SIMULATION ###
+
+record(ai, "$(P)SIM:OUTPUT$(C):RAMP:SYMMETRY")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(EGU, "%")
+}
+
+alias("$(P)SIM:OUTPUT$(C):RAMP:SYMMETRY","$(P)SIM:OUTPUT$(C):RAMP:SYMMETRY:SP")
+
+alias("$(P)SIM:OUTPUT$(C):RAMP:SYMMETRY","$(P)SIM:OUTPUT$(C):RAMP:SYMMETRY:SP:RBV")
 
 record(ai, "$(P)SIM:OUTPUT$(C):IMPEDANCE")
 {
