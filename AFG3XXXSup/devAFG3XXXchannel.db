@@ -86,6 +86,7 @@ record(ai, "$(P)OUTPUT$(C):RAMP:SYMMETRY")
     field(PINI, "YES")
 }
 
+#Stringout because can send either <value>, MIN or MAX
 record(stringout, "$(P)OUTPUT$(C):RAMP:SYMMETRY:SP")
 {
     field(DTYP, "stream")
