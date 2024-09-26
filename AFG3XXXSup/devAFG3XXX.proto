@@ -272,3 +272,13 @@ setSweepTime {
 trigger {
     out "*TRG";
 }
+
+getRampSymmetry {
+	out "SOUR\$1:FUNC:RAMP:SYMM?";
+	in "%f";
+	ExraInput = Ignore;
+}
+
+setRampSymmetry {
+	out "SOUR\$1:FUNC:RAMP:SYMM %s";
+}
