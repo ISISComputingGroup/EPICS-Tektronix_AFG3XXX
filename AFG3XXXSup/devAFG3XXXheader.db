@@ -39,6 +39,66 @@ record(bo, "$(P)TRIGGER")
 
 alias("$(P)TRIGGER", "$(P)TRIGGER:SP")
 
+## general read/write
+
+record(stringout, "$(P)READ:SP")
+{
+    field(DESC, "General input command")
+    field(VAL, "*IDN?")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:READ")
+    field(SDIS, "$(P)DISABLE")
+    field(FLNK, "$(P)READ")
+    info(archive, "VAL")
+}
+
+record(stringin, "$(P)READ")
+{
+    field(DESC, "General input command response")
+    field(DTYP, "stream")
+    field(INP, "@devAFG3XXX.proto readCommand($(P)READ:SP) $(PORT)")
+    field(SCAN, "Passive")
+    field(SIOL, "$(P)SIM:READ")
+    field(SIML, "$(P)SIM")
+    field(SDIS, "$(P)DISABLE")
+    info(INTEREST, "HIGH")
+    info(archive, "VAL")
+}
+
+record(stringin, "$(P)SIM:READ")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)READ", "$(P)READ:SP:RBV")
+alias("$(P)SIM:READ", "$(P)SIM:READ:SP")
+alias("$(P)SIM:READ", "$(P)SIM:READ:SP:RBV")
+
+record(stringout, "$(P)WRITE:SP")
+{
+    field(DESC, "General output command")
+    field(DTYP, "stream")
+    field(OUT, "@devAFG3XXX.proto writeCommand $(PORT)")
+    field(SCAN, "Passive")
+    field(SIOL, "$(P)SIM:WRITE")
+    field(SIML, "$(P)SIM")
+    field(SDIS, "$(P)DISABLE")
+    info(archive, "VAL")
+    info(INTEREST, "HIGH")
+}
+
+record(stringin, "$(P)SIM:WRITE")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)WRITE", "$(P)WRITE:SP:RBV")
+alias("$(P)SIM:WRITE", "$(P)SIM:WRITE:SP")
+alias("$(P)SIM:WRITE", "$(P)SIM:WRITE:SP:RBV")
+
+
 ## SIMULATION
 
 record(stringin, "$(P)SIM:IDN")

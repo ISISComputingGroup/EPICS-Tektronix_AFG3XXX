@@ -282,3 +282,14 @@ getRampSymmetry {
 setRampSymmetry {
 	out "SOUR\$1:FUNC:RAMP:SYMM %s";
 }
+
+# send arbitrary commands
+writeCommand {
+    out "%s"; 
+}
+
+readCommand {
+    out "%(\$1.VAL)s"; 
+    in "%39c"; 
+    ExtraInput = Ignore;
+}
