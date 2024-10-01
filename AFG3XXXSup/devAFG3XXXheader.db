@@ -94,7 +94,7 @@ record(stringin, "$(P)SIM:WRITE")
     field(DTYP, "Soft Channel")
 }
 
-alias("$(P)WRITE", "$(P)WRITE:SP:RBV")
+alias("$(P)WRITE:SP", "$(P)WRITE:SP:RBV")
 alias("$(P)SIM:WRITE", "$(P)SIM:WRITE:SP")
 alias("$(P)SIM:WRITE", "$(P)SIM:WRITE:SP:RBV")
 
